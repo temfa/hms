@@ -1,22 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 // Import Swiper styles
-import 'swiper/css';
-import 'aos';
-import 'aos/dist/aos.css';
-import reportWebVitals from './reportWebVitals';
-import 'react-tooltip/dist/react-tooltip.css';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import 'react-datepicker/dist/react-datepicker.css';
-import 'react-modern-drawer/dist/index.css';
+import "swiper/css";
+import "aos";
+import "aos/dist/aos.css";
+import reportWebVitals from "./reportWebVitals";
+import "react-tooltip/dist/react-tooltip.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "react-modern-drawer/dist/index.css";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/store/store";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

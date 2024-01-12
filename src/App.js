@@ -24,6 +24,7 @@ import Receptions from "./screens/Receptions";
 import NewMedicalRecode from "./screens/Patients/NewMedicalRecode";
 import NotFound from "./screens/NotFound";
 import Login from "./screens/Login";
+import Nurses from "./screens/Nurses";
 
 function App() {
   Aos.init();
@@ -33,39 +34,39 @@ function App() {
       {/* Toaster */}
       <Toast />
       {/* Routes */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          {/* invoce */}
-          <Route path="/invoices" element={<Invoices />} />
-          <Route path="/invoices/create" element={<CreateInvoice />} />
-          <Route path="/invoices/edit/:id" element={<EditInvoice />} />
-          <Route path="/invoices/preview/:id" element={<PreviewInvoice />} />
-          {/* payments */}
-          <Route path="/payments" element={<Payments />} />
-          <Route path="/payments/edit/:id" element={<EditPayment />} />
-          <Route path="/payments/preview/:id" element={<PreviewPayment />} />
-          {/* patient */}
-          <Route path="/patients" element={<Patients />} />
-          <Route path="/patients/preview/:id" element={<PatientProfile />} />
-          <Route path="/patients/create" element={<CreatePatient />} />
-          <Route path="/patients/visiting/:id" element={<NewMedicalRecode />} />
-          {/* doctors */}
-          <Route path="/doctors" element={<Doctors />} />
-          <Route path="/doctors/preview/:id" element={<DoctorProfile />} />
-          {/* reception */}
-          <Route path="/receptions" element={<Receptions />} />
-          {/* others */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/campaigns" element={<Campaings />} />
-          <Route path="/medicine" element={<Medicine />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {/* invoce */}
+        <Route path="/invoices" element={<Invoices />} />
+        <Route path="/invoices/create" element={<CreateInvoice />} />
+        <Route path="/invoices/edit/:id" element={<EditInvoice />} />
+        <Route path="/invoices/preview/:id" element={<PreviewInvoice />} />
+        {/* payments */}
+        <Route path="/payments" element={<Payments />} />
+        <Route path="/payments/edit/:id" element={<EditPayment />} />
+        <Route path="/payments/preview/:id" element={<PreviewPayment />} />
+        {/* patient */}
+        <Route path="/patients" element={<Patients />} />
+        <Route path="/patients/preview/:id" element={<PatientProfile />} />
+        <Route path="/patients/create" element={<CreatePatient />} />
+        <Route path="/patients/visiting/:id" element={<NewMedicalRecode />} />
+        {/* doctors */}
+        <Route path="/doctors" element={<Doctors />} />
+        <Route path="/doctors/preview/:id" element={<DoctorProfile />} />
+        {/* reception */}
+        <Route path="/receptions" element={<Receptions />} />
+        {/* Nurses */}
+        <Route path="/nurses" element={<Nurses />} />
+        {/* others */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/campaigns" element={<Campaings />} />
+        <Route path="/medicine" element={<Medicine />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
     </>
   );
 }

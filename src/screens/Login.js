@@ -1,35 +1,30 @@
 import React, { useState } from "react";
-import { Button, Input } from "../components/Form";
-import { BiLogInCircle } from "react-icons/bi";
+import { Button, Input, Select } from "../components/Form";
+import { BiChevronDown, BiLogInCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { useDispatch } from "react-redux";
+import { setRoles } from "../redux/slice/roles";
+import toast from "react-hot-toast";
+import { sortsDatas } from "../components/Datas";
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({ name: "Choose User..." });
   return (
     <div className="w-full h-screen flex-colo bg-dry">
       <form className="w-2/5 p-8 rounded-2xl mx-auto bg-white flex-colo">
         <img src="/images/logo.png" alt="logo" className="w-48 h-16 object-contain" />
         <div className="flex flex-col gap-4 w-full mb-6">
-          <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
-            <div class="flex w-full divide-x divide-gray-800 row">
-              <button
-                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full rounded-r-none border-r-0"
-                type="button">
-                Doctors
-              </button>
-              <button
-                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full rounded-r-none border-r-0 rounded-l-none"
-                type="button">
-                Nurses
-              </button>
-              <button
-                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full rounded-l-none"
-                type="button">
-                Officers
-              </button>
-            </div>
+          <div className="flex w-full flex-col gap-3">
+            <p className="text-black text-sm">User</p>
+            <Select selectedPerson={user} setSelectedPerson={setUser} datas={sortsDatas.roles}>
+              <div className="w-full flex-btn text-textGray text-sm p-4 border border-border font-light rounded-lg focus:border focus:border-subMain">
+                {user?.name} <BiChevronDown className="text-xl" />
+              </div>
+            </Select>
           </div>
           <Input label="Email" type="email" color={true} placeholder={"admin@gmail.com"} />
           <Input label="Password" type="password" color={true} placeholder={"*********"} />
@@ -40,17 +35,24 @@ function Login() {
           <Button
             label="Login"
             Icon={BiLogInCircle}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setLoading(true);
-              setTimeout(() => {
-                navigate("/dashboard");
-              }, 3000);
+              if (user.name === "Choose User...") {
+                toast.error("Please choose a User");
+                setLoading(false);
+              } else {
+                setTimeout(() => {
+                  dispatch(setRoles(user.name));
+                  navigate("/dashboard");
+                }, 1500);
+              }
             }}
           />
         )}
       </form>
     </div>
   );
-}
+};
 
 export default Login;

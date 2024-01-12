@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../Layout";
 import { BsArrowDownLeft, BsArrowDownRight, BsArrowUpRight, BsCheckCircleFill, BsClockFill, BsXCircleFill } from "react-icons/bs";
-import { DashboardBigChart, DashboardSmallChart } from "../components/Charts";
+import { DashboardSmallChart } from "../components/Charts";
 import { appointmentsData, dashboardCards, memberData, transactionData } from "../components/Datas";
 import { Transactiontable } from "../components/Tables";
 import { Link } from "react-router-dom";

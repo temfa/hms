@@ -1,35 +1,35 @@
-import React from 'react';
-import { MenuSelect } from './Form';
-import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { FiEdit, FiEye } from 'react-icons/fi';
-import { RiDeleteBin6Line, RiDeleteBinLine } from 'react-icons/ri';
-import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { MenuSelect } from "./Form";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { FiEdit, FiEye } from "react-icons/fi";
+import { RiDeleteBin6Line, RiDeleteBinLine } from "react-icons/ri";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const thclass = 'text-start text-sm font-medium py-3 px-2 whitespace-nowrap';
-const tdclass = 'text-start text-sm py-4 px-2 whitespace-nowrap';
+const thclass = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
+const tdclass = "text-start text-sm py-4 px-2 whitespace-nowrap";
 
 export function Transactiontable({ data, action, functions }) {
   const DropDown1 = [
     {
-      title: 'Edit',
+      title: "Edit",
       icon: FiEdit,
       onClick: (data) => {
         functions.edit(data.id);
       },
     },
     {
-      title: 'View',
+      title: "View",
       icon: FiEye,
       onClick: (data) => {
         functions.preview(data.id);
       },
     },
     {
-      title: 'Delete',
+      title: "Delete",
       icon: RiDeleteBin6Line,
       onClick: () => {
-        toast.error('This feature is not available yet');
+        toast.error("This feature is not available yet");
       },
     },
   ];
@@ -50,26 +50,17 @@ export function Transactiontable({ data, action, functions }) {
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>{index + 1}</td>
             <td className={tdclass}>
               <div className="flex gap-4 items-center">
                 <span className="w-12">
-                  <img
-                    src={item.user.image}
-                    alt={item.user.title}
-                    className="w-full h-12 rounded-full object-cover border border-border"
-                  />
+                  <img src={item.user.image} alt={item.user.title} className="w-full h-12 rounded-full object-cover border border-border" />
                 </span>
 
                 <div>
                   <h4 className="text-sm font-medium">{item.user.title}</h4>
-                  <p className="text-xs mt-1 text-textGray">
-                    {item.user.phone}
-                  </p>
+                  <p className="text-xs mt-1 text-textGray">{item.user.phone}</p>
                 </div>
               </div>
             </td>
@@ -77,13 +68,12 @@ export function Transactiontable({ data, action, functions }) {
             <td className={tdclass}>
               <span
                 className={`py-1 px-4 ${
-                  item.status === 'Paid'
-                    ? 'bg-subMain text-subMain'
-                    : item.status === 'Pending'
-                    ? 'bg-orange-500 text-orange-500'
-                    : item.status === 'Cancel' && 'bg-red-600 text-red-600'
-                } bg-opacity-10 text-xs rounded-xl`}
-              >
+                  item.status === "Paid"
+                    ? "bg-subMain text-subMain"
+                    : item.status === "Pending"
+                    ? "bg-orange-500 text-orange-500"
+                    : item.status === "Cancel" && "bg-red-600 text-red-600"
+                } bg-opacity-10 text-xs rounded-xl`}>
                 {item.status}
               </span>
             </td>
@@ -110,24 +100,24 @@ export function InvoiceTable({ data }) {
   const navigate = useNavigate();
   const DropDown1 = [
     {
-      title: 'Edit',
+      title: "Edit",
       icon: FiEdit,
       onClick: (item) => {
         navigate(`/invoices/edit/${item.id}`);
       },
     },
     {
-      title: 'View',
+      title: "View",
       icon: FiEye,
       onClick: (item) => {
         navigate(`/invoices/preview/${item.id}`);
       },
     },
     {
-      title: 'Delete',
+      title: "Delete",
       icon: RiDeleteBin6Line,
       onClick: () => {
-        toast.error('This feature is not available yet');
+        toast.error("This feature is not available yet");
       },
     },
   ];
@@ -147,25 +137,16 @@ export function InvoiceTable({ data }) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>#{item?.id}</td>
             <td className={tdclass}>
               <div className="flex gap-4 items-center">
                 <span className="w-12">
-                  <img
-                    src={item?.to?.image}
-                    alt={item?.to?.title}
-                    className="w-full h-12 rounded-full object-cover border border-border"
-                  />
+                  <img src={item?.to?.image} alt={item?.to?.title} className="w-full h-12 rounded-full object-cover border border-border" />
                 </span>
                 <div>
                   <h4 className="text-sm font-medium">{item?.to?.title}</h4>
-                  <p className="text-xs mt-1 text-textGray">
-                    {item?.to?.email}
-                  </p>
+                  <p className="text-xs mt-1 text-textGray">{item?.to?.email}</p>
                 </div>
               </div>
             </td>
@@ -190,17 +171,17 @@ export function InvoiceTable({ data }) {
 export function MedicineTable({ data, onEdit }) {
   const DropDown1 = [
     {
-      title: 'Edit',
+      title: "Edit",
       icon: FiEdit,
       onClick: (item) => {
         onEdit(item);
       },
     },
     {
-      title: 'Delete',
+      title: "Delete",
       icon: RiDeleteBin6Line,
       onClick: () => {
-        toast.error('This feature is not available yet');
+        toast.error("This feature is not available yet");
       },
     },
   ];
@@ -220,24 +201,13 @@ export function MedicineTable({ data, onEdit }) {
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>
               <h4 className="text-sm font-medium">{item?.name}</h4>
             </td>
             <td className={`${tdclass} font-semibold`}>{item?.price}</td>
             <td className={tdclass}>
-              <span
-                className={`text-xs font-medium ${
-                  item?.status === 'Out of stock'
-                    ? 'text-red-600'
-                    : 'text-green-600'
-                }`}
-              >
-                {item?.status}
-              </span>
+              <span className={`text-xs font-medium ${item?.status === "Out of stock" ? "text-red-600" : "text-green-600"}`}>{item?.status}</span>
             </td>
             <td className={tdclass}>{item?.stock}</td>
             <td className={tdclass}>{item?.measure}</td>
@@ -259,17 +229,17 @@ export function MedicineTable({ data, onEdit }) {
 export function ServiceTable({ data, onEdit }) {
   const DropDown1 = [
     {
-      title: 'Edit',
+      title: "Edit",
       icon: FiEdit,
       onClick: (item) => {
         onEdit(item);
       },
     },
     {
-      title: 'Delete',
+      title: "Delete",
       icon: RiDeleteBin6Line,
       onClick: () => {
-        toast.error('This feature is not available yet');
+        toast.error("This feature is not available yet");
       },
     },
   ];
@@ -288,23 +258,14 @@ export function ServiceTable({ data, onEdit }) {
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>
               <h4 className="text-sm font-medium">{item?.name}</h4>
             </td>
             <td className={tdclass}>{item?.date}</td>
             <td className={`${tdclass} font-semibold`}>{item?.price}</td>
             <td className={tdclass}>
-              <span
-                className={`text-xs font-medium ${
-                  !item?.status ? 'text-red-600' : 'text-green-600'
-                }`}
-              >
-                {!item?.status ? 'Disabled' : 'Enabled'}
-              </span>
+              <span className={`text-xs font-medium ${!item?.status ? "text-red-600" : "text-green-600"}`}>{!item?.status ? "Disabled" : "Enabled"}</span>
             </td>
             <td className={tdclass}>
               <MenuSelect datas={DropDown1} item={item}>
@@ -321,35 +282,26 @@ export function ServiceTable({ data, onEdit }) {
 }
 
 // patient table
-export function PatientTable({ data, functions, used }) {
-  const DropDown1 = !used
-    ? [
-        {
-          title: 'View',
-          icon: FiEye,
-          onClick: (data) => {
-            functions.preview(data.id);
-          },
-        },
-        {
-          title: 'Delete',
-          icon: RiDeleteBin6Line,
-          onClick: () => {
-            toast.error('This feature is not available yet');
-          },
-        },
-      ]
-    : [
-        {
-          title: 'View',
-          icon: FiEye,
-          onClick: (data) => {
-            functions.preview(data.id);
-          },
-        },
-      ];
-  const thclasse = 'text-start text-sm font-medium py-3 px-2 whitespace-nowrap';
-  const tdclasse = 'text-start text-xs py-4 px-2 whitespace-nowrap';
+export const PatientTable = ({ data, functions, used, name, sort }) => {
+  const DropDown1 = [
+    {
+      title: "View",
+      icon: FiEye,
+      onClick: (data) => {
+        functions.preview(data.id);
+      },
+    },
+    {
+      title: "Delete",
+      icon: RiDeleteBin6Line,
+      onClick: () => {
+        toast.error("This feature is not available yet");
+      },
+    },
+  ];
+
+  const thclasse = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
+  const tdclasse = "text-start text-xs py-4 px-2 whitespace-nowrap";
   return (
     <table className="table-auto w-full">
       <thead className="bg-dry rounded-md overflow-hidden">
@@ -358,90 +310,80 @@ export function PatientTable({ data, functions, used }) {
           <th className={thclasse}>Patient</th>
           <th className={thclasse}>Created At</th>
           <th className={thclasse}>Gender</th>
-          {!used && (
-            <>
-              <th className={thclasse}>Blood Group</th>
-              <th className={thclasse}>Age</th>
-            </>
-          )}
-
+          <th className={thclasse}>Blood Group</th>
+          <th className={thclasse}>Age</th>
           <th className={thclasse}>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
-            <td className={tdclasse}>{index + 1}</td>
-            <td className={tdclasse}>
-              <div className="flex gap-4 items-center">
-                {!used && (
-                  <span className="w-12">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-12 rounded-full object-cover border border-border"
-                    />
-                  </span>
-                )}
+        {data
+          ?.sort((x, y) => {
+            let a = new Date(x.date),
+              b = new Date(y.date);
+            if (sort.name === "Oldest Patients") {
+              return a - b;
+            } else if (sort.name === "Newest Patients") {
+              return b - a;
+            } else return true;
+          })
+          ?.filter((el) => el.title.toLowerCase().includes(name.toLowerCase()))
+          .map((item, index) => (
+            <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
+              <td className={tdclasse}>{index + 1}</td>
+              <td className={tdclasse}>
+                <div className="flex gap-4 items-center">
+                  {used && (
+                    <span className="w-12">
+                      <img src={item.image} alt={item.title} className="w-full h-12 rounded-full object-cover border border-border" />
+                    </span>
+                  )}
 
-                <div>
-                  <h4 className="text-sm font-medium">{item.title}</h4>
-                  <p className="text-xs mt-1 text-textGray">{item.phone}</p>
+                  <div>
+                    <h4 className="text-sm font-medium">{item.title}</h4>
+                    <p className="text-xs mt-1 text-textGray">{item.phone}</p>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td className={tdclasse}>{item.date}</td>
+              </td>
+              <td className={tdclasse}>{item.date}</td>
 
-            <td className={tdclasse}>
-              <span
-                className={`py-1 px-4 ${
-                  item.gender === 'Male'
-                    ? 'bg-subMain text-subMain'
-                    : 'bg-orange-500 text-orange-500'
-                } bg-opacity-10 text-xs rounded-xl`}
-              >
-                {item.gender}
-              </span>
-            </td>
-            {!used && (
-              <>
-                <td className={tdclasse}>{item.blood}</td>
-                <td className={tdclasse}>{item.age}</td>
-              </>
-            )}
+              <td className={tdclasse}>
+                <span className={`py-1 px-4 ${item.gender === "Male" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"} bg-opacity-10 text-xs rounded-xl`}>
+                  {item.gender}
+                </span>
+              </td>
 
-            <td className={tdclasse}>
-              <MenuSelect datas={DropDown1} item={item}>
-                <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
-                  <BiDotsHorizontalRounded />
-                </div>
-              </MenuSelect>
-            </td>
-          </tr>
-        ))}
+              <td className={tdclasse}>{item.blood}</td>
+              <td className={tdclasse}>{item.age}</td>
+
+              <td className={tdclasse}>
+                <MenuSelect datas={DropDown1} item={item}>
+                  <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
+                    <BiDotsHorizontalRounded />
+                  </div>
+                </MenuSelect>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );
-}
+};
 
 // doctor table
 export function DoctorsTable({ data, functions, doctor }) {
   const DropDown1 = [
     {
-      title: 'View',
+      title: "View",
       icon: FiEye,
       onClick: (data) => {
         functions.preview(data);
       },
     },
     {
-      title: 'Delete',
+      title: "Delete",
       icon: RiDeleteBin6Line,
       onClick: () => {
-        toast.error('This feature is not available yet');
+        toast.error("This feature is not available yet");
       },
     },
   ];
@@ -450,7 +392,7 @@ export function DoctorsTable({ data, functions, doctor }) {
       <thead className="bg-dry rounded-md overflow-hidden">
         <tr>
           <th className={thclass}>#</th>
-          <th className={thclass}>{doctor ? 'Doctor' : 'Receptionist'}</th>
+          <th className={thclass}>{doctor ? "Doctor" : "Receptionist"}</th>
           <th className={thclass}>Created At</th>
           <th className={thclass}>Phone</th>
           <th className={thclass}>Title</th>
@@ -460,19 +402,12 @@ export function DoctorsTable({ data, functions, doctor }) {
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>{index + 1}</td>
             <td className={tdclass}>
               <div className="flex gap-4 items-center">
                 <span className="w-12">
-                  <img
-                    src={item.user.image}
-                    alt={item.user.title}
-                    className="w-full h-12 rounded-full object-cover border border-border"
-                  />
+                  <img src={item.user.image} alt={item.user.title} className="w-full h-12 rounded-full object-cover border border-border" />
                 </span>
                 <h4 className="text-sm font-medium">{item.user.title}</h4>
               </div>
@@ -505,7 +440,7 @@ export function AppointmentTable({ data, functions, doctor }) {
       <thead className="bg-dry rounded-md overflow-hidden">
         <tr>
           <th className={thclass}>Date</th>
-          <th className={thclass}>{doctor ? 'Patient' : 'Doctor'}</th>
+          <th className={thclass}>{doctor ? "Patient" : "Doctor"}</th>
           <th className={thclass}>Status</th>
           <th className={thclass}>Time</th>
           <th className={thclass}>Action</th>
@@ -513,31 +448,23 @@ export function AppointmentTable({ data, functions, doctor }) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>
               <p className="text-xs">{item.date}</p>
             </td>
             <td className={tdclass}>
-              <h4 className="text-xs font-medium">
-                {doctor ? item.user.title : item.doctor.title}
-              </h4>
-              <p className="text-xs mt-1 text-textGray">
-                {doctor ? item.user.phone : item.doctor.phone}
-              </p>
+              <h4 className="text-xs font-medium">{doctor ? item.user.title : item.doctor.title}</h4>
+              <p className="text-xs mt-1 text-textGray">{doctor ? item.user.phone : item.doctor.phone}</p>
             </td>
             <td className={tdclass}>
               <span
                 className={`py-1  px-4 ${
-                  item.status === 'Approved'
-                    ? 'bg-subMain text-subMain'
-                    : item.status === 'Pending'
-                    ? 'bg-orange-500 text-orange-500'
-                    : item.status === 'Cancel' && 'bg-red-600 text-red-600'
-                } bg-opacity-10 text-xs rounded-xl`}
-              >
+                  item.status === "Approved"
+                    ? "bg-subMain text-subMain"
+                    : item.status === "Pending"
+                    ? "bg-orange-500 text-orange-500"
+                    : item.status === "Cancel" && "bg-red-600 text-red-600"
+                } bg-opacity-10 text-xs rounded-xl`}>
                 {item.status}
               </span>
             </td>
@@ -546,10 +473,7 @@ export function AppointmentTable({ data, functions, doctor }) {
             </td>
 
             <td className={tdclass}>
-              <button
-                onClick={() => functions.preview(item)}
-                className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10"
-              >
+              <button onClick={() => functions.preview(item)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
                 <FiEye />
               </button>
             </td>
@@ -567,7 +491,7 @@ export function PaymentTable({ data, functions, doctor }) {
       <thead className="bg-dry rounded-md overflow-hidden">
         <tr>
           <th className={thclass}>Date</th>
-          <th className={thclass}>{doctor ? 'Patient' : 'Doctor'}</th>
+          <th className={thclass}>{doctor ? "Patient" : "Doctor"}</th>
           <th className={thclass}>Status</th>
           <th className={thclass}>Amount</th>
           <th className={thclass}>Method</th>
@@ -576,31 +500,23 @@ export function PaymentTable({ data, functions, doctor }) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>
               <p className="text-xs">{item.date}</p>
             </td>
             <td className={tdclass}>
-              <h4 className="text-xs font-medium">
-                {doctor ? item.user.title : item.doctor.title}
-              </h4>
-              <p className="text-xs mt-1 text-textGray">
-                {doctor ? item.user.phone : item.doctor.phone}
-              </p>
+              <h4 className="text-xs font-medium">{doctor ? item.user.title : item.doctor.title}</h4>
+              <p className="text-xs mt-1 text-textGray">{doctor ? item.user.phone : item.doctor.phone}</p>
             </td>
             <td className={tdclass}>
               <span
                 className={`py-1  px-4 ${
-                  item.status === 'Paid'
-                    ? 'bg-subMain text-subMain'
-                    : item.status === 'Pending'
-                    ? 'bg-orange-500 text-orange-500'
-                    : item.status === 'Cancel' && 'bg-red-600 text-red-600'
-                } bg-opacity-10 text-xs rounded-xl`}
-              >
+                  item.status === "Paid"
+                    ? "bg-subMain text-subMain"
+                    : item.status === "Pending"
+                    ? "bg-orange-500 text-orange-500"
+                    : item.status === "Cancel" && "bg-red-600 text-red-600"
+                } bg-opacity-10 text-xs rounded-xl`}>
                 {item.status}
               </span>
             </td>
@@ -612,10 +528,7 @@ export function PaymentTable({ data, functions, doctor }) {
             </td>
 
             <td className={tdclass}>
-              <button
-                onClick={() => functions.preview(item.id)}
-                className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10"
-              >
+              <button onClick={() => functions.preview(item.id)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
                 <FiEye />
               </button>
             </td>
@@ -641,10 +554,7 @@ export function InvoiceUsedTable({ data, functions }) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>
               <p className="text-xs">#{item.id}</p>
             </td>
@@ -660,10 +570,7 @@ export function InvoiceUsedTable({ data, functions }) {
             </td>
 
             <td className={tdclass}>
-              <button
-                onClick={() => functions.preview(item.id)}
-                className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10"
-              >
+              <button onClick={() => functions.preview(item.id)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
                 <FiEye />
               </button>
             </td>
@@ -695,20 +602,14 @@ export function InvoiceProductsTable({ data, functions, button }) {
       </thead>
       <tbody>
         {data?.map((item) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={`${tdclass}  font-medium`}>{item.name}</td>
             <td className={`${tdclass} text-xs`}>{item.price}</td>
             <td className={tdclass}>{item.id}</td>
             <td className={tdclass}>{item.price * item.id}</td>
             {button && (
               <td className={tdclass}>
-                <button
-                  onClick={() => functions.deleteItem(item.id)}
-                  className="bg-red-600 bg-opacity-5 text-red-600 rounded-lg border border-red-100 py-3 px-4 text-sm"
-                >
+                <button onClick={() => functions.deleteItem(item.id)} className="bg-red-600 bg-opacity-5 text-red-600 rounded-lg border border-red-100 py-3 px-4 text-sm">
                   <RiDeleteBinLine />
                 </button>
               </td>
@@ -723,8 +624,8 @@ export function InvoiceProductsTable({ data, functions, button }) {
 // medicine Dosage table
 
 export function MedicineDosageTable({ data, functions, button }) {
-  const thclasse = 'text-start text-xs font-medium py-3 px-2 whitespace-nowrap';
-  const tdclasse = 'text-start text-xs py-4 px-2 whitespace-nowrap';
+  const thclasse = "text-start text-xs font-medium py-3 px-2 whitespace-nowrap";
+  const tdclasse = "text-start text-xs py-4 px-2 whitespace-nowrap";
   return (
     <table className="table-auto w-full">
       <thead className="bg-dry rounded-md overflow-hidden">
@@ -746,10 +647,7 @@ export function MedicineDosageTable({ data, functions, button }) {
       </thead>
       <tbody>
         {data?.map((item) => (
-          <tr
-            key={item.id}
-            className="border-b border-border hover:bg-greyed transitions"
-          >
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclasse}>{item.name}</td>
             <td className={tdclasse}>{item.price}</td>
             <td className={tdclasse}>{item.id} - M/A/E</td>
@@ -758,10 +656,7 @@ export function MedicineDosageTable({ data, functions, button }) {
             <td className={tdclasse}>{item.price * item.id}</td>
             {button && (
               <td className={tdclasse}>
-                <button
-                  onClick={() => functions.delete(item.id)}
-                  className="bg-red-600 bg-opacity-5 text-red-600 rounded-lg border border-red-100 py-3 px-4 text-sm"
-                >
+                <button onClick={() => functions.delete(item.id)} className="bg-red-600 bg-opacity-5 text-red-600 rounded-lg border border-red-100 py-3 px-4 text-sm">
                   <RiDeleteBinLine />
                 </button>
               </td>
