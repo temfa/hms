@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Aos from "aos";
 import Dashboard from "./screens/Dashboard";
 import Toast from "./components/Notifications/Toast";

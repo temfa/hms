@@ -552,19 +552,19 @@ export const sortsDatas = {
       name: "Doctors",
     },
     {
-      id: 1,
+      id: 2,
       name: "Nurses",
     },
     {
-      id: 1,
+      id: 3,
       name: "Receptionist",
     },
     {
-      id: 1,
+      id: 4,
       name: "Pharmacist",
     },
     {
-      id: 1,
+      id: 5,
       name: "Super Admin",
     },
   ],

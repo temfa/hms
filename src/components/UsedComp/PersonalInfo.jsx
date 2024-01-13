@@ -88,7 +88,7 @@ const PersonalInfo = ({ titles }) => {
 
         {/* fullName */}
         <Input label="Full Name" color={true} type="text" register={{ ...register("fullName", { required: "Full Name is required" }) }} />
-        {/* {errors.fullName && <span>{errors.fullName.message}</span>} */}
+        {errors.fullName && <span>{errors.fullName.message}</span>}
         {/* phone */}
         <Input label="Phone Number" color={true} type="number" register={{ ...register("phoneNumber") }} />
         {/* email */}
