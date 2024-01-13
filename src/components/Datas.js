@@ -344,7 +344,7 @@ export const sortsDatas = {
     },
     {
       id: 4,
-      name: "Britam Insurance",
+      name: "ORANGHIS",
     },
   ],
   currency: [

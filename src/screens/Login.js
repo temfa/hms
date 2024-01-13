@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Input, Select } from "../components/Form";
 import { BiChevronDown, BiLogInCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 import { useDispatch } from "react-redux";
 import { setRoles } from "../redux/slice/roles";
 import toast from "react-hot-toast";
@@ -29,27 +28,24 @@ const Login = () => {
           <Input label="Email" type="email" color={true} placeholder={"admin@gmail.com"} />
           <Input label="Password" type="password" color={true} placeholder={"*********"} />
         </div>
-        {loading ? (
-          <Loader />
-        ) : (
-          <Button
-            label="Login"
-            Icon={BiLogInCircle}
-            onClick={(e) => {
-              e.preventDefault();
-              setLoading(true);
-              if (user.name === "Choose User...") {
-                toast.error("Please choose a User");
-                setLoading(false);
-              } else {
-                setTimeout(() => {
-                  dispatch(setRoles(user.name));
-                  navigate("/dashboard");
-                }, 1500);
-              }
-            }}
-          />
-        )}
+        <Button
+          label="Login"
+          Icon={BiLogInCircle}
+          onClick={(e) => {
+            e.preventDefault();
+            setLoading(true);
+            if (user.name === "Choose User...") {
+              toast.error("Please choose a User");
+              setLoading(false);
+            } else {
+              setTimeout(() => {
+                dispatch(setRoles(user.name));
+                navigate("/dashboard");
+              }, 1500);
+            }
+          }}
+          loading={loading}
+        />
       </form>
     </div>
   );

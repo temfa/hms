@@ -4,7 +4,7 @@ import { BiLoaderCircle } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import { FaCheck } from "react-icons/fa";
 
-export function Input({ label, name, type, color, placeholder, register }) {
+export const Input = ({ label, name, type, color, placeholder, register }) => {
   return (
     <div className="text-sm w-full">
       <label className={`${color ? "text-black text-sm" : "text-white font-semibold"} `}>{label}</label>
@@ -17,13 +17,17 @@ export function Input({ label, name, type, color, placeholder, register }) {
       />
     </div>
   );
-}
+};
 
 // button
 
-export function Button({ label, onClick, loading, Icon }) {
+export function Button({ label, onClick, loading, Icon, type }) {
   return (
-    <button disabled={loading} onClick={onClick} className={`w-full flex-rows gap-4 hover:opacity-80 transitions bg-subMain text-white text-sm font-medium px-2 py-4 rounded`}>
+    <button
+      disabled={loading}
+      onClick={onClick}
+      className={`w-full flex-rows gap-4 hover:opacity-80 transitions bg-subMain text-white text-sm font-medium px-2 py-4 rounded`}
+      type={type ? "submit" : "button"}>
       {loading ? (
         <BiLoaderCircle className="animate-spin text-white text-2xl" />
       ) : (

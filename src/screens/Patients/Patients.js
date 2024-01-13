@@ -6,18 +6,17 @@ import { BiChevronDown, BiPlus, BiTime } from "react-icons/bi";
 import { BsCalendarMonth } from "react-icons/bs";
 import { MdFilterList, MdOutlineCalendarMonth } from "react-icons/md";
 import { toast } from "react-hot-toast";
-import { Button, FromToDate, Select } from "../../components/Form";
+import { Button, Select } from "../../components/Form";
 import { PatientTable } from "../../components/Tables";
 
 function Patients() {
   const [status, setStatus] = useState(sortsDatas.filterPatient[0]);
   const [patient, setPatient] = useState("");
   // const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
-  const [startDate, endDate] = dateRange;
+  // const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  // const [startDate, endDate] = dateRange;
   const navigate = useNavigate();
 
-  console.log(dateRange[0]);
   const sorts = [
     {
       id: 2,
