@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { MenuSelect } from "./Form";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FiEdit, FiEye } from "react-icons/fi";
 import { RiDeleteBin6Line, RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 const thclass = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
 const tdclass = "text-start text-sm py-4 px-2 whitespace-nowrap";
@@ -283,6 +284,30 @@ export function ServiceTable({ data, onEdit }) {
 
 // patient table
 export const PatientTable = ({ data, functions, used, name, sort }) => {
+  const dataCopy = [...data];
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const usersPerPage = 20;
+  const lastIndex = pageNumber * usersPerPage;
+  const firstIndex = lastIndex - usersPerPage;
+  const pageCount = Math.ceil(dataCopy.length / usersPerPage);
+  const number = [...Array(pageCount + 1).keys()].slice(1);
+
+  const prePage = () => {
+    if (pageNumber !== 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (pageNumber !== pageCount) {
+      setPageNumber(pageNumber + 1);
+    }
+  };
+
+  const changeCPage = (n) => {
+    setPageNumber(n);
+  };
   const DropDown1 = [
     {
       title: "View",
@@ -300,72 +325,123 @@ export const PatientTable = ({ data, functions, used, name, sort }) => {
     },
   ];
 
+  const calculate_age = (dob) => {
+    var diff_ms = Date.now() - dob.getTime();
+    var age_dt = new Date(diff_ms);
+
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+  };
   const thclasse = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
   const tdclasse = "text-start text-xs py-4 px-2 whitespace-nowrap";
   return (
-    <table className="table-auto w-full">
-      <thead className="bg-dry rounded-md overflow-hidden">
-        <tr>
-          <th className={thclasse}>#</th>
-          <th className={thclasse}>Patient</th>
-          <th className={thclasse}>Created At</th>
-          <th className={thclasse}>Gender</th>
-          <th className={thclasse}>Blood Group</th>
-          <th className={thclasse}>Age</th>
-          <th className={thclasse}>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data
-          ?.sort((x, y) => {
-            let a = new Date(x.date),
-              b = new Date(y.date);
-            if (sort.name === "Oldest Patients") {
-              return a - b;
-            } else if (sort.name === "Newest Patients") {
-              return b - a;
-            } else return true;
-          })
-          ?.filter((el) => el.title.toLowerCase().includes(name.toLowerCase()))
-          .map((item, index) => (
-            <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
-              <td className={tdclasse}>{index + 1}</td>
-              <td className={tdclasse}>
-                <div className="flex gap-4 items-center">
-                  {used && (
-                    <span className="w-12">
-                      <img src={item.image} alt={item.title} className="w-full h-12 rounded-full object-cover border border-border" />
+    <>
+      <table className="table-auto w-full">
+        <thead className="bg-dry rounded-md overflow-hidden">
+          <tr>
+            <th className={thclasse}>#</th>
+            <th className={thclasse}>Patient</th>
+            <th className={thclasse}>Created At</th>
+            <th className={thclasse}>Gender</th>
+            <th className={thclasse}>Blood Group</th>
+            <th className={thclasse}>Age</th>
+            <th className={thclasse}>Actions</th>
+          </tr>
+        </thead>
+        {dataCopy.length === 0 ? (
+          <p>No Paitent Yet</p>
+        ) : (
+          <tbody>
+            {dataCopy
+              ?.sort((x, y) => {
+                let a = new Date(x?.registration_date),
+                  b = new Date(y?.registration_date);
+                if (sort.name === "Oldest Patients") {
+                  return a - b;
+                } else if (sort.name === "Newest Patients") {
+                  return b - a;
+                } else return true;
+              })
+              ?.filter((el) => el?.fullname.toLowerCase().includes(name.toLowerCase()))
+              ?.slice(firstIndex, lastIndex)
+              ?.map((item, index) => (
+                <tr key={index} className="border-b border-border hover:bg-greyed transitions">
+                  <td className={tdclasse}>{index + 1}</td>
+                  <td className={tdclasse}>
+                    <div className="flex gap-4 items-center">
+                      {used && (
+                        <span className="w-12">
+                          <img src={item?.image} alt={item?.fullname} className="w-full h-12 rounded-full object-cover border border-border" />
+                        </span>
+                      )}
+
+                      <div>
+                        <h4 className="text-sm font-medium">{item?.fullname}</h4>
+                        <p className="text-xs mt-1 text-textGray">{item.phone}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className={tdclasse}>{new Date(item.registration_date).toDateString()}</td>
+
+                  <td className={tdclasse}>
+                    <span
+                      className={`py-1 px-4 ${
+                        item.gender.toLowerCase() === "male" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"
+                      } bg-opacity-10 text-xs rounded-xl`}>
+                      {item.gender}
                     </span>
-                  )}
+                  </td>
 
-                  <div>
-                    <h4 className="text-sm font-medium">{item.title}</h4>
-                    <p className="text-xs mt-1 text-textGray">{item.phone}</p>
-                  </div>
-                </div>
-              </td>
-              <td className={tdclasse}>{item.date}</td>
+                  <td className={tdclasse}>{item.blood_group === "" ? "Null" : item.blood_group}</td>
+                  <td className={tdclasse}>{calculate_age(new Date(item.date_of_birth))}</td>
 
-              <td className={tdclasse}>
-                <span className={`py-1 px-4 ${item.gender === "Male" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"} bg-opacity-10 text-xs rounded-xl`}>
-                  {item.gender}
-                </span>
-              </td>
-
-              <td className={tdclasse}>{item.blood}</td>
-              <td className={tdclasse}>{item.age}</td>
-
-              <td className={tdclasse}>
-                <MenuSelect datas={DropDown1} item={item}>
-                  <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
-                    <BiDotsHorizontalRounded />
-                  </div>
-                </MenuSelect>
-              </td>
-            </tr>
+                  <td className={tdclasse}>
+                    <MenuSelect datas={DropDown1} item={item}>
+                      <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
+                        <BiDotsHorizontalRounded />
+                      </div>
+                    </MenuSelect>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        )}
+      </table>
+      <div className="flex items-center gap-4">
+        <button
+          className="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+          onClick={prePage}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" aria-hidden="true" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+          </svg>
+          Previous
+        </button>
+        <div className="flex items-center gap-2">
+          {number?.map((item, index) => (
+            <button
+              className={
+                pageNumber === item
+                  ? "relative h-10 max-h-[40px] w-10 max-[40px] select-none rounded-full bg-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  : "relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              }
+              type="button"
+              key={index}
+              onClick={() => changeCPage(item)}>
+              <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">{item}</span>
+            </button>
           ))}
-      </tbody>
-    </table>
+        </div>
+        <button
+          className="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+          onClick={nextPage}>
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" aria-hidden="true" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+          </svg>
+        </button>
+      </div>
+    </>
   );
 };
 
@@ -392,7 +468,7 @@ export function DoctorsTable({ data, functions, doctor }) {
       <thead className="bg-dry rounded-md overflow-hidden">
         <tr>
           <th className={thclass}>#</th>
-          <th className={thclass}>{doctor ? "Doctor" : "Receptionist"}</th>
+          <th className={thclass}>{doctor ? "Doctor" : "Record Officer"}</th>
           <th className={thclass}>Created At</th>
           <th className={thclass}>Phone</th>
           <th className={thclass}>Title</th>

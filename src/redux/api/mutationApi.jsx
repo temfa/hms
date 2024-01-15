@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import { getCookie } from "cookies-next";
 
-const baseUrl = "https://hms-api.000webhostapp.com/controllers";
+const baseUrl = "https://hms-api.daanverified.com/controllers";
 export const mutationApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -11,7 +11,6 @@ export const mutationApi = createApi({
       // headers.set('x-api-key', `${process.env.BASE_KEY}`);
       headers.set("Accept", "application/json");
       headers.set("Content-Type", "application/json");
-      headers.set("Access-Control-Allow-Origin", "*");
       // if (token) {
       //   headers.set("Authorization", `Bearer ${token}`);
       // }
@@ -26,11 +25,11 @@ export const mutationApi = createApi({
         body: newPatient,
       }),
     }),
-    verifyPhoneToken: builder.mutation({
+    getAllPatient: builder.mutation({
       query: (body) => {
         return {
-          url: "/account/verification/phone_num/verify_token",
-          method: "POST",
+          url: "/get_all_patients.php",
+          method: "GET",
           body,
         };
       },
@@ -74,5 +73,5 @@ export const mutationApi = createApi({
   }),
 });
 
-export const { useRegisterNewPatientMutation, useVerifyFarmerIdMutation, useVerifyEmailTokenMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } =
+export const { useRegisterNewPatientMutation, useGetAllPatientMutation, useVerifyEmailTokenMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } =
   mutationApi;

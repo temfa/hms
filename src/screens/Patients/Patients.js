@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Layout";
-import { memberData, sortsDatas } from "../../components/Datas";
+import { sortsDatas } from "../../components/Datas";
 import { Link, useNavigate } from "react-router-dom";
 import { BiChevronDown, BiPlus, BiTime } from "react-icons/bi";
 import { BsCalendarMonth } from "react-icons/bs";
@@ -8,10 +8,14 @@ import { MdFilterList, MdOutlineCalendarMonth } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { Button, Select } from "../../components/Form";
 import { PatientTable } from "../../components/Tables";
+import { useGetAllPatientMutation } from "../../redux/api/mutationApi";
 
 function Patients() {
   const [status, setStatus] = useState(sortsDatas.filterPatient[0]);
   const [patient, setPatient] = useState("");
+  const [patientData, setPatientData] = useState([]);
+  const todayData = [];
+  const monthlyData = [];
   // const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
   // const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   // const [startDate, endDate] = dateRange;
@@ -36,21 +40,21 @@ function Patients() {
     {
       id: 1,
       title: "Today Patients",
-      value: "10",
+      value: todayData.length,
       color: ["bg-subMain", "text-subMain"],
       icon: BiTime,
     },
     {
       id: 2,
       title: "Monthly Patients",
-      value: "230",
+      value: monthlyData.length,
       color: ["bg-orange-500", "text-orange-500"],
       icon: BsCalendarMonth,
     },
     {
       id: 3,
-      title: "Yearly Patients",
-      value: "1,500",
+      title: "Total Patients",
+      value: patientData.length,
       color: ["bg-green-500", "text-green-500"],
       icon: MdOutlineCalendarMonth,
     },
@@ -60,6 +64,31 @@ function Patients() {
   const previewPayment = (id) => {
     navigate(`/patients/preview/${id}`);
   };
+
+  const [getAllPatients, { data: getAllPatient, isSuccess: getAllPatientSuccess, isError: getAllPatientFalse, error: getAllPatientErr }] = useGetAllPatientMutation();
+  useEffect(() => {
+    if (getAllPatientSuccess) {
+      if (getAllPatient) {
+        setPatientData(getAllPatient?.data);
+        // toast.success("Patient Created Successfully");
+        getAllPatient?.data.map((item) => {
+          if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
+          if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
+          return true;
+        });
+      }
+    }
+  }, [getAllPatient, getAllPatientSuccess, todayData, monthlyData]);
+  useEffect(() => {
+    if (getAllPatientFalse) {
+      if (getAllPatientErr) {
+        console.log(getAllPatientErr);
+      }
+    }
+  }, [getAllPatientErr, getAllPatientFalse]);
+  useEffect(() => {
+    getAllPatients();
+  }, [getAllPatients]);
 
   return (
     <Layout>
@@ -117,7 +146,7 @@ function Patients() {
         </div>
         <div className="mt-8 w-full overflow-x-scroll">
           <PatientTable
-            data={memberData}
+            data={patientData}
             functions={{
               preview: previewPayment,
             }}

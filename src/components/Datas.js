@@ -149,7 +149,7 @@ const MenuDatas = () => {
         icon: TbUsers,
       },
       {
-        title: "Receptions",
+        title: "Record Officers",
         path: "/receptions",
         icon: HiOutlineUsers,
       },
@@ -557,7 +557,7 @@ export const sortsDatas = {
     },
     {
       id: 3,
-      name: "Receptionist",
+      name: "Record Officer",
     },
     {
       id: 4,
