@@ -71,14 +71,14 @@ function Patients() {
       if (getAllPatient) {
         setPatientData(getAllPatient?.data);
         // toast.success("Patient Created Successfully");
-        getAllPatient?.data.map((item) => {
-          if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
-          if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
-          return true;
-        });
+        // getAllPatient?.data.map((item) => {
+        //   if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
+        //   if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
+        //   return true;
+        // });
       }
     }
-  }, [getAllPatient, getAllPatientSuccess, todayData, monthlyData]);
+  }, [getAllPatient, getAllPatientSuccess]);
   useEffect(() => {
     if (getAllPatientFalse) {
       if (getAllPatientErr) {
