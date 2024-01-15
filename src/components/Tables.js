@@ -340,6 +340,7 @@ export const PatientTable = ({ data, functions, used, name, sort }) => {
           <tr>
             <th className={thclasse}>#</th>
             <th className={thclasse}>Patient</th>
+            <th className={thclasse}>Patient ID</th>
             <th className={thclasse}>Created At</th>
             <th className={thclasse}>Gender</th>
             <th className={thclasse}>Blood Group</th>
@@ -380,6 +381,7 @@ export const PatientTable = ({ data, functions, used, name, sort }) => {
                       </div>
                     </div>
                   </td>
+                  <td className={tdclasse}>{item.patient_id}</td>
                   <td className={tdclasse}>{new Date(item.registration_date).toDateString()}</td>
 
                   <td className={tdclasse}>

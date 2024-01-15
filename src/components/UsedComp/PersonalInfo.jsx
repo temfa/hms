@@ -62,6 +62,7 @@ const PersonalInfo = ({ titles }) => {
       nok_phone: data.emergencyPhone,
       payer: paymentMethod,
       "register-patient": true,
+      registered_by: "",
     };
     registerNewPatient(datas);
     console.log(data);
