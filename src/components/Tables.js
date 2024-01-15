@@ -312,7 +312,7 @@ export const PatientTable = ({ data, functions, used, name, sort }) => {
       title: "View",
       icon: FiEye,
       onClick: (data) => {
-        functions.preview(data.id);
+        functions.preview(data.patient_id);
       },
     },
     {
@@ -363,47 +363,50 @@ export const PatientTable = ({ data, functions, used, name, sort }) => {
               })
               ?.filter((el) => el?.fullname.toLowerCase().includes(name.toLowerCase()))
               ?.slice(firstIndex, lastIndex)
-              ?.map((item, index) => (
-                <tr key={index} className="border-b border-border hover:bg-greyed transitions">
-                  <td className={tdclasse}>{index + 1}</td>
-                  <td className={tdclasse}>
-                    <div className="flex gap-4 items-center">
-                      {used && (
+              ?.map((item, index) => {
+                let name = item?.fullname.split(" ");
+                return (
+                  <tr key={index} className="border-b border-border hover:bg-greyed transitions">
+                    <td className={tdclasse}>{index + 1}</td>
+                    <td className={tdclasse}>
+                      <div className="flex gap-4 items-center">
+                        {/* {used && (
                         <span className="w-12">
                           <img src={item?.image} alt={item?.fullname} className="w-full h-12 rounded-full object-cover border border-border" />
                         </span>
-                      )}
+                      )} */}
 
-                      <div>
-                        <h4 className="text-sm font-medium">{item?.fullname}</h4>
-                        <p className="text-xs mt-1 text-textGray">{item.phone}</p>
+                        <div>
+                          <h4 className="text-sm font-medium">{`${name[0]} ${name[1] === undefined ? "" : name[1]}`}</h4>
+                          <p className="text-xs mt-1 text-textGray">{item?.phone}</p>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className={tdclasse}>{item.patient_id}</td>
-                  <td className={tdclasse}>{new Date(item.registration_date).toDateString()}</td>
+                    </td>
+                    <td className={tdclasse}>{item?.patient_id}</td>
+                    <td className={tdclasse}>{new Date(item?.registration_date).toDateString()}</td>
 
-                  <td className={tdclasse}>
-                    <span
-                      className={`py-1 px-4 ${
-                        item.gender.toLowerCase() === "male" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"
-                      } bg-opacity-10 text-xs rounded-xl`}>
-                      {item.gender}
-                    </span>
-                  </td>
+                    <td className={tdclasse}>
+                      <span
+                        className={`py-1 px-4 ${
+                          item.gender.toLowerCase() === "male" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"
+                        } bg-opacity-10 text-xs rounded-xl`}>
+                        {item.gender}
+                      </span>
+                    </td>
 
-                  <td className={tdclasse}>{item.blood_group === "" ? "Null" : item.blood_group}</td>
-                  <td className={tdclasse}>{calculate_age(new Date(item.date_of_birth))}</td>
+                    <td className={tdclasse}>{item?.blood_group === "" ? "0+" : item?.blood_group}</td>
+                    <td className={tdclasse}>{calculate_age(new Date(item?.date_of_birth))}</td>
 
-                  <td className={tdclasse}>
-                    <MenuSelect datas={DropDown1} item={item}>
-                      <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
-                        <BiDotsHorizontalRounded />
-                      </div>
-                    </MenuSelect>
-                  </td>
-                </tr>
-              ))}
+                    <td className={tdclasse}>
+                      <MenuSelect datas={DropDown1} item={item}>
+                        <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
+                          <BiDotsHorizontalRounded />
+                        </div>
+                      </MenuSelect>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         )}
       </table>

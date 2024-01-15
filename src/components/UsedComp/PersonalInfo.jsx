@@ -13,6 +13,7 @@ const PersonalInfo = ({ titles }) => {
   const [title, setTitle] = useState(sortsDatas.title[0]);
   const [date, setDate] = useState(new Date());
   const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
+  const [bloodType, setBloodType] = useState(sortsDatas.bloodTypeFilter[0]);
   const [paymentMethod, setPaymentMethod] = useState(sortsDatas.method[0]);
   const [state, setState] = useState(location[0]);
   const [lga, setLga] = useState({ name: "Choose LGA..." });
@@ -54,6 +55,7 @@ const PersonalInfo = ({ titles }) => {
       phone: data.phoneNumber,
       address: data.address,
       lga: lga?.name,
+      blood_group: bloodType.name,
       state: state?.name,
       country: "Nigeria",
       nok_name: data.emergencyContact,
@@ -123,6 +125,14 @@ const PersonalInfo = ({ titles }) => {
               <Select selectedPerson={gender} setSelectedPerson={setGender} datas={sortsDatas.genderFilter}>
                 <div className="w-full flex-btn text-textGray text-sm p-4 border border-border font-light rounded-lg focus:border focus:border-subMain">
                   {gender?.name} <BiChevronDown className="text-xl" />
+                </div>
+              </Select>
+            </div>
+            <div className="flex w-full flex-col gap-3">
+              <p className="text-black text-sm">Blood Group</p>
+              <Select selectedPerson={bloodType} setSelectedPerson={setBloodType} datas={sortsDatas.bloodTypeFilter}>
+                <div className="w-full flex-btn text-textGray text-sm p-4 border border-border font-light rounded-lg focus:border focus:border-subMain">
+                  {bloodType?.name} <BiChevronDown className="text-xl" />
                 </div>
               </Select>
             </div>

@@ -118,7 +118,7 @@ const MenuDatas = () => {
         icon: AiOutlineSetting,
       },
     ];
-  } else if (roles === "Receptionist") {
+  } else if (roles === "Record Officer") {
     return [
       {
         title: "Dashboard",
@@ -2278,11 +2278,11 @@ export const patientTab = [
     title: "Images",
     icon: RiImageLine,
   },
-  {
-    id: 6,
-    title: "Dental Chart",
-    icon: RiStethoscopeLine,
-  },
+  // {
+  //   id: 6,
+  //   title: "Dental Chart",
+  //   icon: RiStethoscopeLine,
+  // },
   {
     id: 7,
     title: "Patient Information",
@@ -2334,122 +2334,122 @@ export const doctorTab = [
 ];
 
 export const medicalRecodData = [
-  {
-    id: 1,
-    date: "13, Jan 2021",
-    amount: 150000,
-    data: [
-      {
-        id: 1,
-        title: "Complaint",
-        value: "Bleeding Gums, Toothache, bad breath",
-      },
-      {
-        id: 2,
-        title: "Diagnosis",
-        value: "Gingivitis, Caries, Periodontitis",
-      },
-      {
-        id: 3,
-        title: "Treatment",
-        value: "Filling, Post&Core, Implant, Extraction",
-      },
-      {
-        id: 4,
-        title: "Prescription",
-        value: "Paracetamol, Amoxicillin, Ibuprofen, Aspirin",
-      },
-    ],
-    attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
-    vitalSigns: ["Blood Pressure: 120/80 mmHg", "Pulse Rate: 80 bpm", "Respiratory Rate: 16 bpm", "Temperature: 36.5 °C", "Oxygen Saturation: 98%"],
-  },
-  {
-    id: 2,
-    date: "10, Feb 2022",
-    amount: 300000,
-    data: [
-      {
-        id: 1,
-        title: "Complaint",
-        value: "Food impaction, Replacing Missing Teeth, bad breath",
-      },
-      {
-        id: 2,
-        title: "Diagnosis",
-        value: "Caries, Periodontitis, Malocclusion",
-      },
-      {
-        id: 3,
-        title: "Treatment",
-        value: "Superficial Scaling, Root Planing, Extraction",
-      },
-      {
-        id: 4,
-        title: "Prescription",
-        value: "Benzocaine, Lidocaine, Mepivacaine, Prilocaine",
-      },
-    ],
-    attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
-    vitalSigns: ["Weight: 60 kg", "Height: 170 cm", "BMI: 20.76 kg/m2", "Blood Pressure: 120/80 mmHg"],
-  },
-  {
-    id: 3,
-    date: "20, Mar 2022",
-    amount: 500000,
-    data: [
-      {
-        id: 1,
-        title: "Complaint",
-        value: "Broken Teeth, Bridge, Cap in the front teeth",
-      },
-      {
-        id: 2,
-        title: "Diagnosis",
-        value: "Unspecified Gingival Recession, Unspecified Caries",
-      },
-      {
-        id: 3,
-        title: "Treatment",
-        value: "Consultation, Scaling, Root Planing, Extraction",
-      },
-      {
-        id: 4,
-        title: "Prescription",
-        value: "Gingival Gel, Chlorhexidine, Fluoride, Calcium",
-      },
-    ],
-    attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
-    vitalSigns: ["Temperature: 36.5 °C", "Oxygen Saturation: 98%", "Blood Pressure: 120/80 mmHg", "Pulse Rate: 80 bpm", "Respiratory Rate: 16 bpm"],
-  },
-  {
-    id: 4,
-    date: "10, Apr 2022",
-    amount: 760000,
-    data: [
-      {
-        id: 1,
-        title: "Complaint",
-        value: "Toothache, bad breath, Bleeding Gums",
-      },
-      {
-        id: 2,
-        title: "Diagnosis",
-        value: "Necrotizing Ulcerative Gingivitis, Periodontitis",
-      },
-      {
-        id: 3,
-        title: "Treatment",
-        value: "Crowns, Bridges, Veneers, Implants",
-      },
-      {
-        id: 4,
-        title: "Prescription",
-        value: "Tramadol, Codeine, Morphine, Oxycodone",
-      },
-    ],
-    attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
-    vitalSigns: ["Sugar Level: 120 mg/dL", "Oxygen Saturation: 98%", "Cholesterol: 200 mg/dL", "Blood Pressure: 120/80 mmHg"],
-  },
+  // {
+  //   id: 1,
+  //   date: "13, Jan 2021",
+  //   amount: 150000,
+  //   data: [
+  //     {
+  //       id: 1,
+  //       title: "Complaint",
+  //       value: "Bleeding Gums, Toothache, bad breath",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Diagnosis",
+  //       value: "Gingivitis, Caries, Periodontitis",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "Treatment",
+  //       value: "Filling, Post&Core, Implant, Extraction",
+  //     },
+  //     {
+  //       id: 4,
+  //       title: "Prescription",
+  //       value: "Paracetamol, Amoxicillin, Ibuprofen, Aspirin",
+  //     },
+  //   ],
+  //   attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
+  //   vitalSigns: ["Blood Pressure: 120/80 mmHg", "Pulse Rate: 80 bpm", "Respiratory Rate: 16 bpm", "Temperature: 36.5 °C", "Oxygen Saturation: 98%"],
+  // },
+  // {
+  //   id: 2,
+  //   date: "10, Feb 2022",
+  //   amount: 300000,
+  //   data: [
+  //     {
+  //       id: 1,
+  //       title: "Complaint",
+  //       value: "Food impaction, Replacing Missing Teeth, bad breath",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Diagnosis",
+  //       value: "Caries, Periodontitis, Malocclusion",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "Treatment",
+  //       value: "Superficial Scaling, Root Planing, Extraction",
+  //     },
+  //     {
+  //       id: 4,
+  //       title: "Prescription",
+  //       value: "Benzocaine, Lidocaine, Mepivacaine, Prilocaine",
+  //     },
+  //   ],
+  //   attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
+  //   vitalSigns: ["Weight: 60 kg", "Height: 170 cm", "BMI: 20.76 kg/m2", "Blood Pressure: 120/80 mmHg"],
+  // },
+  // {
+  //   id: 3,
+  //   date: "20, Mar 2022",
+  //   amount: 500000,
+  //   data: [
+  //     {
+  //       id: 1,
+  //       title: "Complaint",
+  //       value: "Broken Teeth, Bridge, Cap in the front teeth",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Diagnosis",
+  //       value: "Unspecified Gingival Recession, Unspecified Caries",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "Treatment",
+  //       value: "Consultation, Scaling, Root Planing, Extraction",
+  //     },
+  //     {
+  //       id: 4,
+  //       title: "Prescription",
+  //       value: "Gingival Gel, Chlorhexidine, Fluoride, Calcium",
+  //     },
+  //   ],
+  //   attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
+  //   vitalSigns: ["Temperature: 36.5 °C", "Oxygen Saturation: 98%", "Blood Pressure: 120/80 mmHg", "Pulse Rate: 80 bpm", "Respiratory Rate: 16 bpm"],
+  // },
+  // {
+  //   id: 4,
+  //   date: "10, Apr 2022",
+  //   amount: 760000,
+  //   data: [
+  //     {
+  //       id: 1,
+  //       title: "Complaint",
+  //       value: "Toothache, bad breath, Bleeding Gums",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Diagnosis",
+  //       value: "Necrotizing Ulcerative Gingivitis, Periodontitis",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "Treatment",
+  //       value: "Crowns, Bridges, Veneers, Implants",
+  //     },
+  //     {
+  //       id: 4,
+  //       title: "Prescription",
+  //       value: "Tramadol, Codeine, Morphine, Oxycodone",
+  //     },
+  //   ],
+  //   attachments: ["https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300", "https://placehold.it/300x300"],
+  //   vitalSigns: ["Sugar Level: 120 mg/dL", "Oxygen Saturation: 98%", "Cholesterol: 200 mg/dL", "Blood Pressure: 120/80 mmHg"],
+  // },
 ];
 
 export const doctorsData = [
