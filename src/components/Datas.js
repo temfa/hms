@@ -8,7 +8,7 @@ import {
   RiLockPasswordLine,
   RiMedicineBottleLine,
   RiMoneyDollarCircleLine,
-  RiStethoscopeLine,
+  // RiStethoscopeLine,
   RiUserHeartLine,
   RiUserLine,
 } from "react-icons/ri";
