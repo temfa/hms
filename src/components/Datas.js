@@ -27,6 +27,11 @@ const MenuDatas = () => {
         icon: HiOutlineHome,
       },
       {
+        title: "Patients",
+        path: "/patients",
+        icon: TbUsers,
+      },
+      {
         title: "Medicine",
         path: "/medicine",
         icon: RiMedicineBottleLine,
