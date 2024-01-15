@@ -34,10 +34,10 @@ export const mutationApi = createApi({
         };
       },
     }),
-    verifyEmailToken: builder.mutation({
+    users: builder.mutation({
       query: (body) => {
         return {
-          url: "/account/verification/email/verify_token",
+          url: "/users.php",
           method: "POST",
           body,
         };
@@ -73,5 +73,4 @@ export const mutationApi = createApi({
   }),
 });
 
-export const { useRegisterNewPatientMutation, useGetAllPatientMutation, useVerifyEmailTokenMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } =
-  mutationApi;
+export const { useRegisterNewPatientMutation, useGetAllPatientMutation, useUsersMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } = mutationApi;

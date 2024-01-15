@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 
 const MenuDatas = () => {
   const roles = useSelector((state) => state.roles);
-  if (roles === "Pharmacist") {
+  if (roles.role === "Pharmacist") {
     return [
       {
         title: "Dashboard",
@@ -52,7 +52,7 @@ const MenuDatas = () => {
         icon: AiOutlineSetting,
       },
     ];
-  } else if (roles === "Doctors") {
+  } else if (roles.role === "Doctors") {
     return [
       {
         title: "Dashboard",
@@ -85,7 +85,7 @@ const MenuDatas = () => {
         icon: AiOutlineSetting,
       },
     ];
-  } else if (roles === "Nurses") {
+  } else if (roles.role === "Nurses") {
     return [
       {
         title: "Dashboard",
@@ -118,7 +118,7 @@ const MenuDatas = () => {
         icon: AiOutlineSetting,
       },
     ];
-  } else if (roles === "Record Officer") {
+  } else if (roles.role === "Record Officer") {
     return [
       {
         title: "Dashboard",

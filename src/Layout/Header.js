@@ -69,7 +69,7 @@ function Header() {
                     alt="user"
                     className="w-12 border border-border object-cover h-12 rounded-full"
                   />
-                  <p className="text-sm text-textGray font-medium">{roles}</p>
+                  <p className="text-sm text-textGray font-medium">{roles.role}</p>
                 </div>
               </MenuSelect>
             </div>

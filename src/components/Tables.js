@@ -486,18 +486,18 @@ export function DoctorsTable({ data, functions, doctor }) {
             <td className={tdclass}>{index + 1}</td>
             <td className={tdclass}>
               <div className="flex gap-4 items-center">
-                <span className="w-12">
+                {/* <span className="w-12">
                   <img src={item.user.image} alt={item.user.title} className="w-full h-12 rounded-full object-cover border border-border" />
-                </span>
-                <h4 className="text-sm font-medium">{item.user.title}</h4>
+                </span> */}
+                <h4 className="text-sm font-medium">{item?.fullname}</h4>
               </div>
             </td>
             <td className={tdclass}>12 May, 2021</td>
             <td className={tdclass}>
-              <p className="text-textGray">{item.user.phone}</p>
+              <p className="text-textGray">{item?.contact_number}</p>
             </td>
-            <td className={tdclass}>{item.title}</td>
-            <td className={tdclass}>{item.user.email}</td>
+            <td className={tdclass}>{"Dr"}</td>
+            <td className={tdclass}>{item?.email}</td>
 
             <td className={tdclass}>
               <MenuSelect datas={DropDown1} item={item}>
