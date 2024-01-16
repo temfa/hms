@@ -48,8 +48,10 @@ const Login = () => {
       <form className="w-2/5 p-8 rounded-2xl mx-auto bg-white flex-colo" onSubmit={handleSubmit(onSubmit)}>
         <img src="/images/logo.png" alt="logo" className="w-48 h-16 object-contain" />
         <div className="flex flex-col gap-4 w-full mb-6">
-          <Input label="Email" type="email" color={true} placeholder={"admin@gmail.com"} register={{ ...register("email") }} />
-          <Input label="Password" type="password" color={true} placeholder={"*********"} register={{ ...register("password") }} />
+          <Input label="Email" type="email" color={true} placeholder={"admin@gmail.com"} register={{ ...register("email", { required: "Email is required" }) }} />
+          {errors.email && <span>{errors.email.message}</span>}
+          <Input label="Password" type="password" color={true} placeholder={"*********"} register={{ ...register("password", { required: "Password is required" }) }} />
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <Button label="Login" Icon={BiLogInCircle} type={true} loading={userLoginLoad} />
       </form>

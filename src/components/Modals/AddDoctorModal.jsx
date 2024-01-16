@@ -70,6 +70,7 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
         <div className="flex-colo gap-6">
           <div className="grid sm:grid-cols-2 gap-4 w-full">
             <Input label="Full Name" color={true} placeholder="John Doe" register={{ ...register("fullName") }} />
+            {errors.fullName && <span>{errors.fullName.message}</span>}
 
             <Input label="Username" color={true} register={{ ...register("username") }} />
           </div>
