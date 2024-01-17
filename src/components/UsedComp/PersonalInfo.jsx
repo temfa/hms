@@ -5,11 +5,13 @@ import { Button, DatePickerComp, Input, Select, Select2 } from "../Form";
 import { BiChevronDown } from "react-icons/bi";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 import { useForm } from "react-hook-form";
-import { useRegisterNewPatientMutation } from "../../redux/api/mutationApi";
+import { usePatientMutation } from "../../redux/api/mutationApi";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 // import { RiDeleteBin5Line } from "react-icons/ri";
 
 const PersonalInfo = ({ titles }) => {
+  const roles = useSelector((state) => state.roles);
   const [title, setTitle] = useState(sortsDatas.title[0]);
   const [date, setDate] = useState(new Date());
   const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
@@ -30,8 +32,7 @@ const PersonalInfo = ({ titles }) => {
       return true;
     });
   }, [state]);
-  const [registerNewPatient, { data: newPatient, isLoading: newPatientLoad, isSuccess: newPatientSuccess, isError: newPatientFalse, error: newPatientErr }] =
-    useRegisterNewPatientMutation();
+  const [patient, { data: newPatient, isLoading: newPatientLoad, isSuccess: newPatientSuccess, isError: newPatientFalse, error: newPatientErr }] = usePatientMutation();
   useEffect(() => {
     if (newPatientSuccess) {
       if (newPatient) {
@@ -51,6 +52,7 @@ const PersonalInfo = ({ titles }) => {
     const datas = {
       fullname: data.fullName,
       date_of_birth: date,
+      email: data.email,
       gender: gender?.name,
       phone: data.phoneNumber,
       address: data.address,
@@ -62,11 +64,11 @@ const PersonalInfo = ({ titles }) => {
       nok_relation: data.emergencyRelation,
       nok_address: data.emergencyAddress,
       nok_phone: data.emergencyPhone,
-      payer: paymentMethod,
+      payer: paymentMethod.name,
       "register-patient": true,
-      registered_by: "",
+      registered_by: roles?.user_id,
     };
-    registerNewPatient(datas);
+    patient(datas);
     console.log(data);
   };
   return (

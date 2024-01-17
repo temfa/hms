@@ -18,7 +18,7 @@ export const mutationApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    registerNewPatient: builder.mutation({
+    patient: builder.mutation({
       query: (newPatient) => ({
         url: "/patients.php",
         method: "POST",
@@ -73,4 +73,4 @@ export const mutationApi = createApi({
   }),
 });
 
-export const { useRegisterNewPatientMutation, useGetAllPatientMutation, useUsersMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } = mutationApi;
+export const { usePatientMutation, useGetAllPatientMutation, useUsersMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } = mutationApi;
