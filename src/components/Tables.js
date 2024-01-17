@@ -5,6 +5,7 @@ import { FiEdit, FiEye } from "react-icons/fi";
 import { RiDeleteBin6Line, RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { calculate_age } from "../utils/data";
 
 const thclass = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
 const tdclass = "text-start text-sm py-4 px-2 whitespace-nowrap";
@@ -324,12 +325,6 @@ export const PatientTable = ({ data, functions, used, name, sort }) => {
     },
   ];
 
-  const calculate_age = (dob) => {
-    var diff_ms = Date.now() - dob.getTime();
-    var age_dt = new Date(diff_ms);
-
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
-  };
   const thclasse = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
   const tdclasse = "text-start text-xs py-4 px-2 whitespace-nowrap";
   return (

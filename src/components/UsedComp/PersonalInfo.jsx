@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import Uploder from "../Uploader";
 import { location, sortsDatas } from "../Datas";
-import { Button, DatePickerComp, Input, Select, Select2 } from "../Form";
+import { Button, DatePickerComp, Input, Select } from "../Form";
 import { BiChevronDown } from "react-icons/bi";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 import { useForm } from "react-hook-form";
@@ -114,11 +114,11 @@ const PersonalInfo = ({ titles }) => {
             {state.name === "Choose State..." ? null : (
               <div className="flex w-full flex-col gap-3">
                 <p className="text-black text-sm">Local Government</p>
-                <Select2 selectedPerson={lga} setSelectedPerson={setLga} datas={lgaValue}>
+                <Select selectedPerson={lga} setSelectedPerson={setLga} datas={lgaValue}>
                   <div className="w-full flex-btn text-textGray text-sm p-4 border border-border font-light rounded-lg focus:border focus:border-subMain">
                     {lga?.name} <BiChevronDown className="text-xl" />
                   </div>
-                </Select2>
+                </Select>
               </div>
             )}
             {/* gender */}

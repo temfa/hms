@@ -17,6 +17,7 @@ import PreviewPatient from "../../components/Preview/previewPatient";
 
 const PatientProfile = () => {
   const location = useLocation();
+  const locate = location.pathname.split("/");
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
   const [data, setData] = useState({});
@@ -24,7 +25,7 @@ const PatientProfile = () => {
   const tabPanel = () => {
     switch (activeTab) {
       case 1:
-        return <MedicalRecord />;
+        return <MedicalRecord id={locate[locate.length - 1]} />;
       case 2:
         return <AppointmentsUsed doctor={false} />;
       case 3:
@@ -44,6 +45,7 @@ const PatientProfile = () => {
     }
   };
   const [patient, { data: patientNew, isLoading: patientNewLoad, isSuccess: patientNewSuccess, isError: patientNewFalse, error: patientNewErr }] = usePatientMutation();
+
   useEffect(() => {
     const locate = location.pathname.split("/");
     const data = {
@@ -66,7 +68,7 @@ const PatientProfile = () => {
         console.log(patientNewErr);
         toast.error(patientNewErr.data.error);
         if (patientNewErr.data.error === "User not found") {
-          navigate("/doctors");
+          navigate("/patients");
         }
       }
     }
