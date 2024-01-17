@@ -31,7 +31,7 @@ const Login = () => {
     if (userLoginFalse) {
       if (userLoginErr) {
         console.log(userLoginErr);
-        toast.error(userLoginErr);
+        toast.error(userLoginErr.data.error);
       }
     }
   }, [userLoginErr, userLoginFalse]);

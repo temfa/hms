@@ -1,11 +1,11 @@
 import { HiOutlineHome, HiOutlineMail, HiOutlineUsers } from "react-icons/hi";
-import { TbCalendar, TbChartHistogram, TbFile, TbFileInvoice, TbLockAccess, TbUsers } from "react-icons/tb";
+import { TbCalendar, TbChartHistogram, TbFile, TbFileInvoice, TbUsers } from "react-icons/tb";
 import { FaRegCalendarAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import {
   RiFileList3Line,
   RiHeartLine,
   RiImageLine,
-  RiLockPasswordLine,
+  // RiLockPasswordLine,
   RiMedicineBottleLine,
   RiMoneyDollarCircleLine,
   // RiStethoscopeLine,
@@ -14,7 +14,7 @@ import {
 } from "react-icons/ri";
 import { MdListAlt, MdOutlineAttachMoney, MdOutlineCampaign, MdOutlineInventory2, MdOutlineTextsms } from "react-icons/md";
 import { AiOutlineSetting } from "react-icons/ai";
-import { BiCalendar, BiUserPlus } from "react-icons/bi";
+import { BiCalendar } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 const MenuDatas = () => {
@@ -52,7 +52,7 @@ const MenuDatas = () => {
         icon: AiOutlineSetting,
       },
     ];
-  } else if (roles.role === "Doctors") {
+  } else if (roles.role === "Doctor") {
     return [
       {
         title: "Dashboard",
@@ -2301,36 +2301,36 @@ export const doctorTab = [
     title: "Personal Information",
     icon: RiUserLine,
   },
-  {
-    id: 2,
-    title: "Patients",
-    icon: BiUserPlus,
-  },
+  // {
+  //   id: 2,
+  //   title: "Patients",
+  //   icon: BiUserPlus,
+  // },
   {
     id: 3,
     title: "Appointments",
     icon: BiCalendar,
   },
-  {
-    id: 4,
-    title: "Payments",
-    icon: RiMoneyDollarCircleLine,
-  },
-  {
-    id: 5,
-    title: "Invoices",
-    icon: RiFileList3Line,
-  },
-  {
-    id: 6,
-    title: "Access Control",
-    icon: TbLockAccess,
-  },
-  {
-    id: 7,
-    title: "Change Password",
-    icon: RiLockPasswordLine,
-  },
+  // {
+  //   id: 4,
+  //   title: "Payments",
+  //   icon: RiMoneyDollarCircleLine,
+  // },
+  // {
+  //   id: 5,
+  //   title: "Invoices",
+  //   icon: RiFileList3Line,
+  // },
+  // {
+  //   id: 6,
+  //   title: "Access Control",
+  //   icon: TbLockAccess,
+  // },
+  // {
+  //   id: 7,
+  //   title: "Change Password",
+  //   icon: RiLockPasswordLine,
+  // },
 ];
 
 export const medicalRecodData = [

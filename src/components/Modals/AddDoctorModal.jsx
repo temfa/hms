@@ -48,6 +48,7 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
         console.log(userNew);
         toast.success("Created Successfully");
         closeModal();
+        window.location.reload();
       }
     }
   }, [userNew, userNewSuccess, closeModal]);

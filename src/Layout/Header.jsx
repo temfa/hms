@@ -65,11 +65,14 @@ function Header() {
               <MenuSelect datas={DropDown1}>
                 <div className="flex gap-4 items-center p-4 rounded-lg">
                   <img
-                    src={roles === "Doctors" ? "/images/doctoravatar.png" : roles === "Nurses" ? "/images/nurseavatar.png" : "/images/user.jpeg"}
+                    src={roles.role === "Doctor" ? "/images/doctoravatar.png" : roles.role === "Nurse" ? "/images/nurseavatar.png" : "/images/user.jpeg"}
                     alt="user"
                     className="w-12 border border-border object-cover h-12 rounded-full"
                   />
-                  <p className="text-sm text-textGray font-medium">{roles.role}</p>
+                  <div>
+                    <p className="text-sm text-textGray font-bold">{roles.fullname}</p>
+                    <p className="text-sm text-textGray font-medium">{roles.role}</p>
+                  </div>
                 </div>
               </MenuSelect>
             </div>

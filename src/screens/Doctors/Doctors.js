@@ -11,6 +11,7 @@ import { useUsersMutation } from "../../redux/api/mutationApi";
 
 function Doctors() {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const [doctorData, setDoctorData] = useState([]);
   const navigate = useNavigate();
 
@@ -19,7 +20,15 @@ function Doctors() {
   };
 
   const preview = (data) => {
-    navigate(`/doctors/preview/${data.id}`);
+    navigate(`/doctors/preview/${data}`);
+  };
+
+  const deleteItem = (data) => {
+    const datas = {
+      "delete-user": true,
+      user_id: data,
+    };
+    getAllDoctors(datas);
   };
 
   const [getAllDoctors, { data: getAllDoctor, isSuccess: getAllDoctorSuccess, isError: getAllDoctorFalse, error: getAllDoctorErr }] = useUsersMutation();
@@ -69,7 +78,12 @@ function Doctors() {
 
         <div className="grid md:grid-cols-6 sm:grid-cols-2 grid-cols-1 gap-2">
           <div className="md:col-span-5 grid lg:grid-cols-4 items-center gap-6">
-            <input type="text" placeholder='Search "daudi mburuge"' className="h-14 w-full text-sm text-main rounded-md bg-dry border border-border px-4" />
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => setSearch(e.target.value)}
+              className="h-14 w-full text-sm text-main rounded-md bg-dry border border-border px-4"
+            />
           </div>
 
           {/* export */}
@@ -88,6 +102,10 @@ function Doctors() {
             functions={{
               preview: preview,
             }}
+            deleteItem={{
+              deleteItem: deleteItem,
+            }}
+            search={search}
           />
         </div>
       </div>

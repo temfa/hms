@@ -143,7 +143,7 @@ export function DatePickerComp({ label, startDate, onChange }) {
     <div className="text-sm w-full">
       <label className={"text-black text-sm"}>{label}</label>
       <DatePicker
-        selected={startDate}
+        selected={startDate === undefined ? "" : startDate}
         onChange={onChange}
         className="w-full bg-transparent text-sm mt-3 p-4 border border-border font-light rounded-lg focus:border focus:border-subMain"
       />
