@@ -28,7 +28,7 @@ const Reception = () => {
       "delete-user": true,
       user_id: data,
     };
-    // getAllNurses(datas);
+    getAllRecordOfficers(datas);
   };
 
   const [getAllRecordOfficers, { data: getAllRecordOfficer, isSuccess: getAllRecordOfficerSuccess, isError: getAllRecordOfficerFalse, error: getAllRecordOfficerErr }] =
