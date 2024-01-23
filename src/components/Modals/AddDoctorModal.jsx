@@ -25,20 +25,36 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
   const [userBody, { data: userNew, isLoading: userNewLoad, isSuccess: userNewSuccess, isError: userNewFalse, error: userNewErr }] = useUsersMutation();
 
   const onSubmit = (data) => {
-    const datad = {
-      "register-user": true,
-      username: data.username,
-      password: data.password,
-      role: "Doctor",
-      fullname: data.fullName,
-      date_of_birth: date,
-      gender: gender.name,
-      contact_number: data.phone,
-      email: data.email,
-      address: data.address,
-      specialization: data.specialization,
-      license_number: data.licenseNumber,
-    };
+    let datad;
+    if (doctor === "Doctor") {
+      datad = {
+        "register-user": true,
+        username: data.username,
+        password: data.password,
+        role: doctor,
+        fullname: data.fullName,
+        date_of_birth: date,
+        gender: gender.name,
+        contact_number: data.phone,
+        email: data.email,
+        address: data.address,
+        specialization: data.specialization,
+        license_number: data.licenseNumber,
+      };
+    } else {
+      datad = {
+        "register-user": true,
+        username: data.username,
+        password: data.password,
+        role: doctor,
+        fullname: data.fullName,
+        date_of_birth: date,
+        gender: gender.name,
+        contact_number: data.phone,
+        email: data.email,
+        address: data.address,
+      };
+    }
     console.log(datad);
     userBody(datad);
   };
@@ -56,13 +72,13 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
     if (userNewFalse) {
       if (userNewErr) {
         console.log(userNewErr);
-        toast.error(userNewErr);
+        toast.error(userNewErr.data.error);
       }
     }
   }, [userNewErr, userNewFalse]);
 
   return (
-    <Modal closeModal={closeModal} isOpen={isOpen} title={doctor ? "Add Doctor" : datas?.id ? "Edit Stuff" : "Add Stuff"} width={"max-w-3xl"}>
+    <Modal closeModal={closeModal} isOpen={isOpen} title={`Add ${doctor}`} width={"max-w-3xl"}>
       {/* <div className="flex gap-3 flex-col col-span-6 mb-6">
         <p className="text-sm">Profile Image</p>
         <Uploader />
@@ -91,11 +107,41 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
             </div>
             <DatePickerComp label="Date of Birth" startDate={date} onChange={(date) => setDate(date)} />
           </div>
-          <div className="grid sm:grid-cols-2 gap-4 w-full">
-            <Input label="Address" color={true} register={{ ...register("address") }} />
-            <Input label="Specialization" color={true} register={{ ...register("specialization") }} />
-          </div>
-          <Input label="License Number" color={true} register={{ ...register("licenseNumber") }} />
+          {doctor === "Doctor" ? (
+            <>
+              <div className="grid sm:grid-cols-2 gap-4 w-full">
+                <Input
+                  label="Address"
+                  color={true}
+                  register={{
+                    ...register("address"),
+                  }}
+                />
+                <Input
+                  label="Specialization"
+                  color={true}
+                  register={{
+                    ...register("specialization"),
+                  }}
+                />
+              </div>
+              <Input
+                label="License Number"
+                color={true}
+                register={{
+                  ...register("licenseNumber"),
+                }}
+              />
+            </>
+          ) : (
+            <Input
+              label="Address"
+              color={true}
+              register={{
+                ...register("address"),
+              }}
+            />
+          )}
 
           {/* password */}
           <Input label="Password" type="password" color={true} register={{ ...register("password") }} />

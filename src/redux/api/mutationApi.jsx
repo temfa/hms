@@ -43,10 +43,10 @@ export const mutationApi = createApi({
         };
       },
     }),
-    verifyFarmerId: builder.mutation({
+    medicalRecord: builder.mutation({
       query: (body) => {
         return {
-          url: "/farmer/verify",
+          url: "/medical-records.php",
           method: "POST",
           body,
         };
@@ -73,4 +73,5 @@ export const mutationApi = createApi({
   }),
 });
 
-export const { usePatientMutation, useGetAllPatientMutation, useUsersMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } = mutationApi;
+export const { usePatientMutation, useGetAllPatientMutation, useUsersMutation, useMedicalRecordMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } =
+  mutationApi;

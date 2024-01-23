@@ -21,9 +21,12 @@ const Login = () => {
   useEffect(() => {
     if (userLoginSuccess) {
       if (userLogin) {
-        console.log(userLogin);
-        dispatch(setRoles(userLogin));
-        navigate("/dashboard");
+        if (userLogin.is_active === 1) {
+          dispatch(setRoles(userLogin));
+          navigate("/dashboard");
+        } else {
+          toast.error("Your account has been suspended. Please reach out to the administrator");
+        }
       }
     }
   }, [userLogin, userLoginSuccess, dispatch, navigate]);

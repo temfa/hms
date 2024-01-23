@@ -5,14 +5,14 @@ import { BiPlus } from "react-icons/bi";
 import Layout from "../../Layout";
 import { Button } from "../../components/Form";
 import { DoctorsTable } from "../../components/Tables";
-import { useNavigate } from "react-router-dom";
 import AddDoctorModal from "../../components/Modals/AddDoctorModal";
+import { useNavigate } from "react-router-dom";
 import { useUsersMutation } from "../../redux/api/mutationApi";
 
-function Doctors() {
+const Nurses = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [doctorData, setDoctorData] = useState([]);
+  const [nursesData, setNursesData] = useState([]);
   const navigate = useNavigate();
 
   const onCloseModal = () => {
@@ -20,7 +20,7 @@ function Doctors() {
   };
 
   const preview = (data) => {
-    navigate(`/doctors/preview/${data}`);
+    navigate(`/nurses/preview/${data}`);
   };
 
   const deleteItem = (data) => {
@@ -28,42 +28,42 @@ function Doctors() {
       "delete-user": true,
       user_id: data,
     };
-    getAllDoctors(datas);
+    getAllNurses(datas);
   };
 
-  const [getAllDoctors, { data: getAllDoctor, isSuccess: getAllDoctorSuccess, isError: getAllDoctorFalse, error: getAllDoctorErr }] = useUsersMutation();
+  const [getAllNurses, { data: getAllNurse, isSuccess: getAllNurseSuccess, isError: getAllNurseFalse, error: getAllNurseErr }] = useUsersMutation();
   useEffect(() => {
-    if (getAllDoctorSuccess) {
-      if (getAllDoctor) {
-        getAllDoctor?.data?.filter((item) => {
-          if (item.role === "Doctor") setDoctorData((arr) => [...arr, item]);
+    if (getAllNurseSuccess) {
+      if (getAllNurse) {
+        getAllNurse?.data?.filter((item) => {
+          if (item.role === "Nurses") setNursesData((arr) => [...arr, item]);
           return true;
         });
         // toast.success("Patient Created Successfully");
-        // getAllDoctor?.data.map((item) => {
+        // getAllNurse?.data.map((item) => {
         //   if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
         //   if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
         //   return true;
         // });
       }
     }
-  }, [getAllDoctor, getAllDoctorSuccess]);
+  }, [getAllNurse, getAllNurseSuccess]);
   useEffect(() => {
-    if (getAllDoctorFalse) {
-      if (getAllDoctorErr) {
-        console.log(getAllDoctorErr);
+    if (getAllNurseFalse) {
+      if (getAllNurseErr) {
+        console.log(getAllNurseErr);
       }
     }
-  }, [getAllDoctorErr, getAllDoctorFalse]);
+  }, [getAllNurseErr, getAllNurseFalse]);
   useEffect(() => {
-    getAllDoctors({ "all-users": true });
-  }, [getAllDoctors]);
+    getAllNurses({ "all-users": true });
+  }, [getAllNurses]);
 
   return (
     <Layout>
       {
         // add doctor modal
-        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Doctor"} datas={null} />
+        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Nurses"} datas={null} />
       }
       {/* add button */}
       <button
@@ -72,7 +72,7 @@ function Doctors() {
         <BiPlus className="text-2xl" />
       </button>
       {/*  */}
-      <h1 className="text-xl font-semibold">Doctors</h1>
+      <h1 className="text-xl font-semibold">Receptions</h1>
       <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" data-aos-offset="200" className="bg-white my-8 rounded-xl border-[1px] border-border p-5">
         {/* datas */}
 
@@ -80,7 +80,7 @@ function Doctors() {
           <div className="md:col-span-5 grid lg:grid-cols-4 items-center gap-6">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search Nurses"
               onChange={(e) => setSearch(e.target.value)}
               className="h-14 w-full text-sm text-main rounded-md bg-dry border border-border px-4"
             />
@@ -97,8 +97,8 @@ function Doctors() {
         </div>
         <div className="mt-8 w-full overflow-x-scroll">
           <DoctorsTable
-            doctor="Doctors"
-            data={doctorData}
+            doctor="Nurses"
+            data={nursesData}
             functions={{
               preview: preview,
             }}
@@ -111,6 +111,6 @@ function Doctors() {
       </div>
     </Layout>
   );
-}
+};
 
-export default Doctors;
+export default Nurses;

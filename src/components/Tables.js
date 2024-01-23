@@ -470,11 +470,12 @@ export function DoctorsTable({ data, functions, doctor, search, deleteItem }) {
         <thead className="bg-dry rounded-md overflow-hidden">
           <tr>
             <th className={thclass}>#</th>
-            <th className={thclass}>{doctor ? "Doctor" : "Record Officer"}</th>
+            <th className={thclass}>{doctor}</th>
             <th className={thclass}>User ID</th>
             <th className={thclass}>Phone</th>
             <th className={thclass}>Email</th>
             <th className={thclass}>Gender</th>
+            <th className={thclass}>Status</th>
             <th className={thclass}>Address</th>
             <th className={thclass}>Actions</th>
           </tr>
@@ -503,12 +504,10 @@ export function DoctorsTable({ data, functions, doctor, search, deleteItem }) {
                   </td>
                   {/* <td className={tdclass}>{"Dr"}</td> */}
                   <td className={tdclass}>{item?.email}</td>
+                  <td className={tdclass}>{item.gender}</td>
                   <td className={tdclass}>
-                    <span
-                      className={`py-1 px-4 ${
-                        item.gender.toLowerCase() === "male" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"
-                      } bg-opacity-10 text-xs rounded-xl`}>
-                      {item.gender}
+                    <span className={`py-1 px-4 ${item.is_active === "1" ? "bg-subMain text-subMain" : "bg-orange-500 text-orange-500"} bg-opacity-10 text-xs rounded-xl`}>
+                      {item.is_active === "1" ? "Active" : "Not Active"}
                     </span>
                   </td>
                   <td className={tdclass}>{item.address}</td>

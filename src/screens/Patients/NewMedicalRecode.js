@@ -210,7 +210,7 @@ const NewMedicalRecode = () => {
               <p className="text-black text-sm">Attachments</p>
               <div className="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
                 {[1, 2, 3, 4].map((_, i) => (
-                  <div className="relative w-full">
+                  <div className="relative w-full" key={i}>
                     <img src={`https://placehold.it/300x300?text=${i}`} alt="patient" className="w-full  md:h-40 rounded-lg object-cover" />
                     <button onClick={() => toast.error("This feature is not available yet.")} className="bg-white rounded-full w-8 h-8 flex-colo absolute -top-1 -right-1">
                       <FaTimes className="text-red-500" />

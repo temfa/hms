@@ -39,7 +39,7 @@ const PatientProfile = () => {
       case 7:
         return <PreviewPatient data={data} />;
       case 8:
-        return <HealthInfomation />;
+        return <HealthInfomation data={data} />;
       default:
         return;
     }
