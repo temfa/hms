@@ -9,10 +9,10 @@ import AddDoctorModal from "../../components/Modals/AddDoctorModal";
 import { useNavigate } from "react-router-dom";
 import { useUsersMutation } from "../../redux/api/mutationApi";
 
-const Nurses = () => {
+const Reception = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [nursesData, setNursesData] = useState([]);
+  const [recordData, setRecordData] = useState([]);
   const navigate = useNavigate();
 
   const onCloseModal = () => {
@@ -20,7 +20,7 @@ const Nurses = () => {
   };
 
   const preview = (data) => {
-    navigate(`/nurses/preview/${data}`);
+    navigate(`/recordofficers/preview/${data}`);
   };
 
   const deleteItem = (data) => {
@@ -28,42 +28,43 @@ const Nurses = () => {
       "delete-user": true,
       user_id: data,
     };
-    getAllNurses(datas);
+    // getAllNurses(datas);
   };
 
-  const [getAllNurses, { data: getAllNurse, isSuccess: getAllNurseSuccess, isError: getAllNurseFalse, error: getAllNurseErr }] = useUsersMutation();
+  const [getAllRecordOfficers, { data: getAllRecordOfficer, isSuccess: getAllRecordOfficerSuccess, isError: getAllRecordOfficerFalse, error: getAllRecordOfficerErr }] =
+    useUsersMutation();
   useEffect(() => {
-    if (getAllNurseSuccess) {
-      if (getAllNurse) {
-        getAllNurse?.data?.filter((item) => {
-          if (item.role === "Nurses") setNursesData((arr) => [...arr, item]);
+    if (getAllRecordOfficerSuccess) {
+      if (getAllRecordOfficer) {
+        getAllRecordOfficer?.data?.filter((item) => {
+          if (item.role === "Record Officers") setRecordData((arr) => [...arr, item]);
           return true;
         });
         // toast.success("Patient Created Successfully");
-        // getAllNurse?.data.map((item) => {
+        // getAllRecordOfficer?.data.map((item) => {
         //   if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
         //   if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
         //   return true;
         // });
       }
     }
-  }, [getAllNurse, getAllNurseSuccess]);
+  }, [getAllRecordOfficer, getAllRecordOfficerSuccess]);
   useEffect(() => {
-    if (getAllNurseFalse) {
-      if (getAllNurseErr) {
-        console.log(getAllNurseErr);
+    if (getAllRecordOfficerFalse) {
+      if (getAllRecordOfficerErr) {
+        console.log(getAllRecordOfficerErr);
       }
     }
-  }, [getAllNurseErr, getAllNurseFalse]);
+  }, [getAllRecordOfficerErr, getAllRecordOfficerFalse]);
   useEffect(() => {
-    getAllNurses({ "all-users": true });
-  }, [getAllNurses]);
+    getAllRecordOfficers({ "all-users": true });
+  }, [getAllRecordOfficers]);
 
   return (
     <Layout>
       {
         // add doctor modal
-        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Nurses"} datas={null} />
+        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Record Officers"} datas={null} />
       }
       {/* add button */}
       <button
@@ -72,7 +73,7 @@ const Nurses = () => {
         <BiPlus className="text-2xl" />
       </button>
       {/*  */}
-      <h1 className="text-xl font-semibold">Nurses</h1>
+      <h1 className="text-xl font-semibold">Record Officers</h1>
       <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" data-aos-offset="200" className="bg-white my-8 rounded-xl border-[1px] border-border p-5">
         {/* datas */}
 
@@ -97,8 +98,8 @@ const Nurses = () => {
         </div>
         <div className="mt-8 w-full overflow-x-scroll">
           <DoctorsTable
-            doctor="Nurses"
-            data={nursesData}
+            doctor="Record Officers"
+            data={recordData}
             functions={{
               preview: preview,
             }}
@@ -113,4 +114,4 @@ const Nurses = () => {
   );
 };
 
-export default Nurses;
+export default Reception;

@@ -20,12 +20,13 @@ import PatientProfile from "./screens/Patients/PatientProfile";
 import CreatePatient from "./screens/Patients/CreatePatient";
 import Doctors from "./screens/Doctors/Doctors";
 import DoctorProfile from "./screens/Doctors/DoctorProfile";
-import Receptions from "./screens/Receptions";
 import NewMedicalRecode from "./screens/Patients/NewMedicalRecode";
 import NotFound from "./screens/NotFound";
 import Login from "./screens/Login";
 import Nurses from "./screens/Nurses/Nurses";
 import NurseProfile from "./screens/Nurses/NursesProfile";
+import Reception from "./screens/Reception/Reception";
+import ReceptionProfile from "./screens/Reception/ReceptionProfile";
 
 function App() {
   Aos.init();
@@ -55,7 +56,8 @@ function App() {
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctors/preview/:id" element={<DoctorProfile />} />
         {/* reception */}
-        <Route path="/receptions" element={<Receptions />} />
+        <Route path="/recordofficers" element={<Reception />} />
+        <Route path="/recordofficers/preview/:id" element={<ReceptionProfile />} />
         {/* Nurses */}
         <Route path="/nurses" element={<Nurses />} />
         <Route path="/nurses/preview/:id" element={<NurseProfile />} />

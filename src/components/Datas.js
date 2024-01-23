@@ -155,7 +155,7 @@ const MenuDatas = () => {
       },
       {
         title: "Record Officers",
-        path: "/receptions",
+        path: "/recordofficers",
         icon: HiOutlineUsers,
       },
       {
