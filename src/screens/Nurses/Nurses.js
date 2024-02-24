@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdOutlineCloudDownload } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { BiPlus } from "react-icons/bi";
@@ -7,12 +7,12 @@ import { Button } from "../../components/Form";
 import { DoctorsTable } from "../../components/Tables";
 import AddDoctorModal from "../../components/Modals/AddDoctorModal";
 import { useNavigate } from "react-router-dom";
-import { useUsersMutation } from "../../redux/api/mutationApi";
+import { useGetAllUsers } from "../../hooks/useGetAllUsers";
 
 const Nurses = () => {
+  const { allUsers } = useGetAllUsers("Nurses");
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [nursesData, setNursesData] = useState([]);
   const navigate = useNavigate();
 
   const onCloseModal = () => {
@@ -23,41 +23,13 @@ const Nurses = () => {
     navigate(`/nurses/preview/${data}`);
   };
 
-  const deleteItem = (data) => {
-    const datas = {
-      "delete-user": true,
-      user_id: data,
-    };
-    getAllNurses(datas);
-  };
-
-  const [getAllNurses, { data: getAllNurse, isSuccess: getAllNurseSuccess, isError: getAllNurseFalse, error: getAllNurseErr }] = useUsersMutation();
-  useEffect(() => {
-    if (getAllNurseSuccess) {
-      if (getAllNurse) {
-        getAllNurse?.data?.filter((item) => {
-          if (item.role === "Nurses") setNursesData((arr) => [...arr, item]);
-          return true;
-        });
-        // toast.success("Patient Created Successfully");
-        // getAllNurse?.data.map((item) => {
-        //   if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
-        //   if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
-        //   return true;
-        // });
-      }
-    }
-  }, [getAllNurse, getAllNurseSuccess]);
-  useEffect(() => {
-    if (getAllNurseFalse) {
-      if (getAllNurseErr) {
-        console.log(getAllNurseErr);
-      }
-    }
-  }, [getAllNurseErr, getAllNurseFalse]);
-  useEffect(() => {
-    getAllNurses({ "all-users": true });
-  }, [getAllNurses]);
+  // const deleteItem = (data) => {
+  //   const datas = {
+  //     "delete-user": true,
+  //     user_id: data,
+  //   };
+  //   getAllNurses(datas);
+  // };
 
   return (
     <Layout>
@@ -98,13 +70,15 @@ const Nurses = () => {
         <div className="mt-8 w-full overflow-x-scroll">
           <DoctorsTable
             doctor="Nurses"
-            data={nursesData}
+            data={allUsers}
             functions={{
               preview: preview,
             }}
-            deleteItem={{
-              deleteItem: deleteItem,
-            }}
+            deleteItem={
+              {
+                // deleteItem: deleteItem,
+              }
+            }
             search={search}
           />
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../../Layout";
 import { sortsDatas } from "../../components/Datas";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,12 +8,12 @@ import { MdFilterList, MdOutlineCalendarMonth } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { Button, Select } from "../../components/Form";
 import { PatientTable } from "../../components/Tables";
-import { useGetAllPatientMutation } from "../../redux/api/mutationApi";
+import { useGetAllPatients } from "../../hooks/useGetAllPatients";
 
-function Patients() {
+const Patients = () => {
+  const { allPatients } = useGetAllPatients();
   const [status, setStatus] = useState(sortsDatas.filterPatient[0]);
   const [patient, setPatient] = useState("");
-  const [patientData, setPatientData] = useState([]);
   const todayData = [];
   const monthlyData = [];
   // const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
@@ -54,7 +54,7 @@ function Patients() {
     {
       id: 3,
       title: "Total Patients",
-      value: patientData.length,
+      value: allPatients.length,
       color: ["bg-green-500", "text-green-500"],
       icon: MdOutlineCalendarMonth,
     },
@@ -64,31 +64,6 @@ function Patients() {
   const previewPayment = (id) => {
     navigate(`/patients/preview/${id}`);
   };
-
-  const [getAllPatients, { data: getAllPatient, isSuccess: getAllPatientSuccess, isError: getAllPatientFalse, error: getAllPatientErr }] = useGetAllPatientMutation();
-  useEffect(() => {
-    if (getAllPatientSuccess) {
-      if (getAllPatient) {
-        setPatientData(getAllPatient?.data);
-        // toast.success("Patient Created Successfully");
-        // getAllPatient?.data.map((item) => {
-        //   if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
-        //   if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
-        //   return true;
-        // });
-      }
-    }
-  }, [getAllPatient, getAllPatientSuccess]);
-  useEffect(() => {
-    if (getAllPatientFalse) {
-      if (getAllPatientErr) {
-        console.log(getAllPatientErr);
-      }
-    }
-  }, [getAllPatientErr, getAllPatientFalse]);
-  useEffect(() => {
-    getAllPatients();
-  }, [getAllPatients]);
 
   return (
     <Layout>
@@ -146,7 +121,7 @@ function Patients() {
         </div>
         <div className="mt-8 w-full overflow-x-scroll">
           <PatientTable
-            data={patientData}
+            data={allPatients}
             functions={{
               preview: previewPayment,
             }}
@@ -158,6 +133,6 @@ function Patients() {
       </div>
     </Layout>
   );
-}
+};
 
 export default Patients;

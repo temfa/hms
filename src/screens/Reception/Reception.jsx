@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdOutlineCloudDownload } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { BiPlus } from "react-icons/bi";
@@ -7,12 +7,12 @@ import { Button } from "../../components/Form";
 import { DoctorsTable } from "../../components/Tables";
 import AddDoctorModal from "../../components/Modals/AddDoctorModal";
 import { useNavigate } from "react-router-dom";
-import { useUsersMutation } from "../../redux/api/mutationApi";
+import { useGetAllUsers } from "../../hooks/useGetAllUsers";
 
 const Reception = () => {
+  const { allUsers } = useGetAllUsers("Record Officers");
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [recordData, setRecordData] = useState([]);
   const navigate = useNavigate();
 
   const onCloseModal = () => {
@@ -23,42 +23,13 @@ const Reception = () => {
     navigate(`/recordofficers/preview/${data}`);
   };
 
-  const deleteItem = (data) => {
-    const datas = {
-      "delete-user": true,
-      user_id: data,
-    };
-    getAllRecordOfficers(datas);
-  };
-
-  const [getAllRecordOfficers, { data: getAllRecordOfficer, isSuccess: getAllRecordOfficerSuccess, isError: getAllRecordOfficerFalse, error: getAllRecordOfficerErr }] =
-    useUsersMutation();
-  useEffect(() => {
-    if (getAllRecordOfficerSuccess) {
-      if (getAllRecordOfficer) {
-        getAllRecordOfficer?.data?.filter((item) => {
-          if (item.role === "Record Officers") setRecordData((arr) => [...arr, item]);
-          return true;
-        });
-        // toast.success("Patient Created Successfully");
-        // getAllRecordOfficer?.data.map((item) => {
-        //   if (new Date(item.registration_date).getDate() === new Date().getDate()) todayData.push(item);
-        //   if (new Date(item.registration_date).getMonth() === new Date().getMonth()) monthlyData.push(item);
-        //   return true;
-        // });
-      }
-    }
-  }, [getAllRecordOfficer, getAllRecordOfficerSuccess]);
-  useEffect(() => {
-    if (getAllRecordOfficerFalse) {
-      if (getAllRecordOfficerErr) {
-        console.log(getAllRecordOfficerErr);
-      }
-    }
-  }, [getAllRecordOfficerErr, getAllRecordOfficerFalse]);
-  useEffect(() => {
-    getAllRecordOfficers({ "all-users": true });
-  }, [getAllRecordOfficers]);
+  // const deleteItem = (data) => {
+  //   const datas = {
+  //     "delete-user": true,
+  //     user_id: data,
+  //   };
+  //   getAllRecordOfficers(datas);
+  // };
 
   return (
     <Layout>
@@ -81,7 +52,7 @@ const Reception = () => {
           <div className="md:col-span-5 grid lg:grid-cols-4 items-center gap-6">
             <input
               type="text"
-              placeholder="Search Nurses"
+              placeholder="Search Record Officers"
               onChange={(e) => setSearch(e.target.value)}
               className="h-14 w-full text-sm text-main rounded-md bg-dry border border-border px-4"
             />
@@ -99,13 +70,15 @@ const Reception = () => {
         <div className="mt-8 w-full overflow-x-scroll">
           <DoctorsTable
             doctor="Record Officers"
-            data={recordData}
+            data={allUsers}
             functions={{
               preview: preview,
             }}
-            deleteItem={{
-              deleteItem: deleteItem,
-            }}
+            deleteItem={
+              {
+                // deleteItem: deleteItem,
+              }
+            }
             search={search}
           />
         </div>

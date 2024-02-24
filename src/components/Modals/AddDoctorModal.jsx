@@ -7,12 +7,15 @@ import { HiOutlineCheckCircle } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useUsersMutation } from "../../redux/api/mutationApi";
+import { useGetAllClinics } from "../../hooks/useGetAllClinics";
 // import Access from "../Access";
 // import Uploader from "../Uploader";
 
-function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
+function AddDoctorModal({ closeModal, isOpen, doctor }) {
   // const [instraction, setInstraction] = useState(sortsDatas.title[0]);
   // const [access, setAccess] = useState({});
+  const { allClinics } = useGetAllClinics();
+  const [clinic, setClinic] = useState({ name: "Choose Clinic..." });
   const [date, setDate] = useState(new Date());
   const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
 
@@ -55,7 +58,6 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
         address: data.address,
       };
     }
-    console.log(datad);
     userBody(datad);
   };
   useEffect(() => {
@@ -64,7 +66,9 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
         console.log(userNew);
         toast.success("Created Successfully");
         closeModal();
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       }
     }
   }, [userNew, userNewSuccess, closeModal]);
@@ -125,13 +129,23 @@ function AddDoctorModal({ closeModal, isOpen, doctor, datas }) {
                   }}
                 />
               </div>
-              <Input
-                label="License Number"
-                color={true}
-                register={{
-                  ...register("licenseNumber"),
-                }}
-              />
+              <div className="grid sm:grid-cols-2 gap-4 w-full">
+                <Input
+                  label="License Number"
+                  color={true}
+                  register={{
+                    ...register("licenseNumber"),
+                  }}
+                />
+                <div className="flex w-full flex-col gap-3">
+                  <p className="text-black text-sm">Clinic</p>
+                  <Select selectedPerson={clinic} setSelectedPerson={setClinic} datas={allClinics}>
+                    <div className="w-full flex-btn text-textGray text-sm p-4 border border-border font-light rounded-lg focus:border focus:border-subMain">
+                      {clinic?.name} <BiChevronDown className="text-xl" />
+                    </div>
+                  </Select>
+                </div>
+              </div>
             </>
           ) : (
             <Input

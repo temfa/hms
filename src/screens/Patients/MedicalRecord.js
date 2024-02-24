@@ -4,11 +4,11 @@ import { BiPlus } from "react-icons/bi";
 import { FiEye } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { medicalRecodData } from "../../components/Datas";
+// import { medicalRecodData } from "../../components/Datas";
 import MedicalRecodModal from "../../components/Modals/MedicalRecodModal";
 import { useNavigate } from "react-router-dom";
 
-const MedicalRecord = ({ id }) => {
+const MedicalRecord = ({ id, medicalRecodData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [datas, setDatas] = useState({});
   const navigate = useNavigate();
@@ -40,28 +40,50 @@ const MedicalRecord = ({ id }) => {
             />
           </div>
         </div>
-        {medicalRecodData.map((data) => (
-          <div key={data.id} className="bg-dry items-start grid grid-cols-12 gap-4 rounded-xl border-[1px] border-border p-6">
+        {medicalRecodData.map((data, index) => (
+          <div key={index} className="bg-dry items-start grid grid-cols-12 gap-4 rounded-xl border-[1px] border-border p-6">
             <div className="col-span-12 md:col-span-2">
-              <p className="text-xs text-textGray font-medium">{data.date}</p>
+              <p className="text-xs text-textGray font-medium">{data.date_created}</p>
             </div>
             <div className="col-span-12 md:col-span-6 flex flex-col gap-2">
-              {data?.data?.map((item, index) => (
-                <p key={item.id} className="text-xs text-main font-light">
-                  <span className="font-medium">{item?.title}:</span>{" "}
-                  {
-                    // if value character is more than 40, show only 40 characters
-                    item?.value?.length > 40 ? `${item?.value?.slice(0, 40)}...` : item?.value
-                  }
-                </p>
-              ))}
+              {/* {data?.data?.map((item, index) => (
+               
+              ))} */}
+              <p className="text-xs text-main font-light">
+                <span className="font-medium">Complaint:</span>
+                {
+                  // if value character is more than 40, show only 40 characters
+                  data?.complains?.length > 40 ? `${data?.complains?.slice(0, 40)}...` : data?.complains
+                }
+              </p>
+              <p className="text-xs text-main font-light">
+                <span className="font-medium">Diagnosis:</span>
+                {
+                  // if value character is more than 40, show only 40 characters
+                  data?.diagnosis?.length > 40 ? `${data?.diagnosis?.slice(0, 40)}...` : data?.diagnosis
+                }
+              </p>
+              <p className="text-xs text-main font-light">
+                <span className="font-medium">Treatment:</span>
+                {
+                  // if value character is more than 40, show only 40 characters
+                  data?.treatment?.length > 40 ? `${data?.treatment?.slice(0, 40)}...` : data?.treatment
+                }
+              </p>
+              <p className="text-xs text-main font-light">
+                <span className="font-medium">Prescription:</span>
+                {
+                  // if value character is more than 40, show only 40 characters
+                  data?.prescription?.length > 40 ? `${data?.prescription?.slice(0, 40)}...` : data?.prescription
+                }
+              </p>
             </div>
             {/* price */}
-            <div className="col-span-12 md:col-span-2">
+            {/* <div className="col-span-12 md:col-span-2">
               <p className="text-xs text-subMain font-semibold">
                 <span className="font-light text-main">(Tsh)</span> {data?.amount}
               </p>
-            </div>
+            </div> */}
             {/* actions */}
             <div className="col-span-12 md:col-span-2 flex-rows gap-2">
               <button

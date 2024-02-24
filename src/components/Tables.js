@@ -6,6 +6,7 @@ import { RiDeleteBin6Line, RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { calculate_age } from "../utils/data";
+import { formatter } from "../utils/formatter";
 
 const thclass = "text-start text-sm font-medium py-3 px-2 whitespace-nowrap";
 const tdclass = "text-start text-sm py-4 px-2 whitespace-nowrap";
@@ -168,6 +169,68 @@ export function InvoiceTable({ data }) {
   );
 }
 
+// clinic table
+export function ClinicTable({ data }) {
+  const navigate = useNavigate();
+  const DropDown1 = [
+    {
+      title: "Edit",
+      icon: FiEdit,
+      onClick: (item) => {
+        navigate(`/invoices/edit/${item.id}`);
+      },
+    },
+    {
+      title: "View",
+      icon: FiEye,
+      onClick: (item) => {
+        navigate(`/invoices/preview/${item.id}`);
+      },
+    },
+    {
+      title: "Delete",
+      icon: RiDeleteBin6Line,
+      onClick: () => {
+        toast.error("This feature is not available yet");
+      },
+    },
+  ];
+  return (
+    <table className="table-auto w-full">
+      <thead className="bg-dry rounded-md overflow-hidden">
+        <tr>
+          <th className={thclass}> ID</th>
+          <th className={thclass}> Name</th>
+          <th className={thclass}> Short Name</th>
+          <th className={thclass}>No. Doctors</th>
+          <th className={thclass}>No. Nurses</th>
+          <th className={thclass}>No. Patients</th>
+          <th className={thclass}>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item) => (
+          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
+            <td className={tdclass}>#{item?.id}</td>
+            <td className={tdclass}>{item.name}</td>
+            <td className={tdclass}>{item?.short_code}</td>
+            <td className={tdclass}>10</td>
+            <td className={`${tdclass} font-semibold`}>10</td>
+            <td className={`${tdclass} font-semibold`}>10</td>
+            <td className={tdclass}>
+              <MenuSelect datas={DropDown1} item={item}>
+                <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
+                  <BiDotsHorizontalRounded />
+                </div>
+              </MenuSelect>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 // prescription table
 export function MedicineTable({ data, onEdit }) {
   const DropDown1 = [
@@ -204,13 +267,15 @@ export function MedicineTable({ data, onEdit }) {
         {data.map((item, index) => (
           <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
             <td className={tdclass}>
-              <h4 className="text-sm font-medium">{item?.name}</h4>
+              <h4 className="text-sm font-medium capitalize">{item?.generic_name}</h4>
             </td>
-            <td className={`${tdclass} font-semibold`}>{item?.price}</td>
+            <td className={`${tdclass} font-semibold`}>{formatter.format(item?.unit_price)}</td>
             <td className={tdclass}>
-              <span className={`text-xs font-medium ${item?.status === "Out of stock" ? "text-red-600" : "text-green-600"}`}>{item?.status}</span>
+              <span className={`text-xs font-medium ${item?.stock_quantity === 0 ? "text-red-600" : "text-green-600"}`}>
+                {item?.stock_quantity === 0 ? "Out of Stock" : "In Stock"}
+              </span>
             </td>
-            <td className={tdclass}>{item?.stock}</td>
+            <td className={tdclass}>{item?.stock_quantity}</td>
             <td className={tdclass}>{item?.measure}</td>
             <td className={tdclass}>
               <MenuSelect datas={DropDown1} item={item}>

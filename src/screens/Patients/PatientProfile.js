@@ -9,7 +9,7 @@ import InvoiceUsed from "../../components/UsedComp/InvoiceUsed";
 import PaymentsUsed from "../../components/UsedComp/PaymentUsed";
 import PatientImages from "./PatientImages";
 import HealthInfomation from "./HealthInfomation";
-import { usePatientMutation } from "../../redux/api/mutationApi";
+import { useMedicalRecordMutation, usePatientMutation } from "../../redux/api/mutationApi";
 import toast from "react-hot-toast";
 import LoadingSkel from "../../components/LoadingSkel";
 import PreviewPatient from "../../components/Preview/previewPatient";
@@ -21,11 +21,12 @@ const PatientProfile = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
   const [data, setData] = useState({});
+  const [medicalRecodData, setMedicalRecordData] = useState([]);
 
   const tabPanel = () => {
     switch (activeTab) {
       case 1:
-        return <MedicalRecord id={locate[locate.length - 1]} />;
+        return <MedicalRecord id={locate[locate.length - 1]} medicalRecodData={medicalRecodData} />;
       case 2:
         return <AppointmentsUsed doctor={false} />;
       case 3:
@@ -45,6 +46,40 @@ const PatientProfile = () => {
     }
   };
   const [patient, { data: patientNew, isLoading: patientNewLoad, isSuccess: patientNewSuccess, isError: patientNewFalse, error: patientNewErr }] = usePatientMutation();
+  const [getMedicalRecords, { data: getMedicalRecord, isSuccess: getMedicalRecordSuccess, isError: getMedicalRecordFalse, error: getMedicalRecordErr }] =
+    useMedicalRecordMutation();
+  useEffect(() => {
+    const data = {
+      "all-records": true,
+    };
+    getMedicalRecords(data);
+  }, [getMedicalRecords]);
+
+  useEffect(() => {
+    if (getMedicalRecordSuccess) {
+      if (getMedicalRecord) {
+        console.log(getMedicalRecord);
+        const locate = location.pathname.split("/");
+        getMedicalRecord?.data?.filter((id) => {
+          if (id.patient_id === locate[locate.length - 1]) {
+            setMedicalRecordData((arr) => [...arr, id]);
+          }
+          return true;
+        });
+        // toast.success(getMedicalRecord.success);
+        //  navigate("/doctors");
+      }
+    }
+  }, [getMedicalRecord, getMedicalRecordSuccess, location.pathname]);
+  console.log(medicalRecodData);
+  useEffect(() => {
+    if (getMedicalRecordFalse) {
+      if (getMedicalRecordErr) {
+        console.log(getMedicalRecordErr);
+        toast.error(getMedicalRecordErr?.data?.error);
+      }
+    }
+  }, [getMedicalRecordErr, getMedicalRecordFalse]);
 
   useEffect(() => {
     const locate = location.pathname.split("/");

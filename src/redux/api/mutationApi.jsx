@@ -52,19 +52,28 @@ export const mutationApi = createApi({
         };
       },
     }),
-    createFarm: builder.mutation({
+    clinics: builder.mutation({
       query: (body) => {
         return {
-          url: "/farm/create",
+          url: "/clinics.php",
           method: "POST",
           body,
         };
       },
     }),
-    editFarm: builder.mutation({
+    wards: builder.mutation({
       query: (body) => {
         return {
-          url: "/farm/edit",
+          url: "/wards.php",
+          method: "POST",
+          body,
+        };
+      },
+    }),
+    medicine: builder.mutation({
+      query: (body) => {
+        return {
+          url: "/medicines.php",
           method: "POST",
           body,
         };
@@ -73,5 +82,4 @@ export const mutationApi = createApi({
   }),
 });
 
-export const { usePatientMutation, useGetAllPatientMutation, useUsersMutation, useMedicalRecordMutation, useVerifyPhoneTokenMutation, useCreateFarmMutation, useEditFarmMutation } =
-  mutationApi;
+export const { usePatientMutation, useGetAllPatientMutation, useUsersMutation, useMedicalRecordMutation, useClinicsMutation, useWardsMutation, useMedicineMutation } = mutationApi;

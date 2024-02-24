@@ -27,6 +27,8 @@ import Nurses from "./screens/Nurses/Nurses";
 import NurseProfile from "./screens/Nurses/NursesProfile";
 import Reception from "./screens/Reception/Reception";
 import ReceptionProfile from "./screens/Reception/ReceptionProfile";
+import Clinics from "./screens/Clinics/clinic";
+import Wards from "./screens/wards/wards";
 
 function App() {
   Aos.init();
@@ -61,6 +63,10 @@ function App() {
         {/* Nurses */}
         <Route path="/nurses" element={<Nurses />} />
         <Route path="/nurses/preview/:id" element={<NurseProfile />} />
+        {/* {clinics} */}
+        <Route path="/clinics" element={<Clinics />} />
+        {/* {wards} */}
+        <Route path="/wards" element={<Wards />} />
         {/* others */}
         <Route path="/login" element={<Login />} />
         <Route path="/appointments" element={<Appointments />} />
