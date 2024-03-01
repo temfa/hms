@@ -2305,6 +2305,25 @@ export const patientTab = [
   },
 ];
 
+export const healthInfo = [
+  {
+    id: 1,
+    title: "Vitals",
+  },
+  {
+    id: 2,
+    title: "History Examination",
+  },
+  {
+    id: 3,
+    title: "Allegies",
+  },
+  {
+    id: 4,
+    title: "Immunization",
+  },
+];
+
 export const doctorTab = [
   {
     id: 1,

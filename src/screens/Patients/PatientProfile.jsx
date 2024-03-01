@@ -40,7 +40,7 @@ const PatientProfile = () => {
       case 7:
         return <PreviewPatient data={data} />;
       case 8:
-        return <HealthInfomation data={data} />;
+        return <HealthInfomation data={data} id={locate[locate.length - 1]} />;
       default:
         return;
     }
@@ -146,6 +146,16 @@ const PatientProfile = () => {
                     <tab.icon className="text-lg" /> {tab.title}
                   </button>
                 ))}
+                {data?.patient_status === "Outpatient" ? (
+                  <button
+                    className={`
+                ${activeTab === 9 ? "bg-text text-subMain" : "bg-dry text-main hover:bg-text hover:text-subMain"}
+                text-xs gap-4 flex items-center w-full p-4 rounded text-center`}>
+                    Admit Patient
+                  </button>
+                ) : (
+                  <button className="bg-dry text-main hover:bg-text hover:text-subMain text-xs gap-4 flex items-center w-full p-4 rounded">Discharge Patient</button>
+                )}
               </div>
             </div>
             {/* tab panel */}

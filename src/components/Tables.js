@@ -97,6 +97,185 @@ export function Transactiontable({ data, action, functions }) {
   );
 }
 
+//Immunization table
+export const ImmunizationTable = ({ data }) => {
+  return (
+    <table className="table-auto w-full">
+      <thead className="bg-dry rounded-md overflow-hidden">
+        <tr>
+          <th className={thclass}>S/N</th>
+          <th className={thclass}>Immunization</th>
+          <th className={thclass}>Date Given</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr className="border-b border-border hover:bg-greyed transitions" key={index}>
+            <td className={tdclass}>
+              <p className="text-xs">{index + 1}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.immunization}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.date_given}</p>
+            </td>
+
+            {/* <td className={tdclass}>
+                <button onClick={() => functions.preview(item.id)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
+                  <FiEye />
+                </button>
+              </td> */}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+//Allegies table
+export const AllegiesTable = ({ data }) => {
+  return (
+    <table className="table-auto w-full">
+      <thead className="bg-dry rounded-md overflow-hidden">
+        <tr>
+          <th className={thclass}>S/N</th>
+          <th className={thclass}>Allergy Type</th>
+          <th className={thclass}>Allegen</th>
+          <th className={thclass}>Reaction</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr className="border-b border-border hover:bg-greyed transitions" key={index}>
+            <td className={tdclass}>
+              <p className="text-xs">{index + 1}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.allergy_type}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.allegen}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.reaction}</p>
+            </td>
+
+            {/* <td className={tdclass}>
+                <button onClick={() => functions.preview(item.id)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
+                  <FiEye />
+                </button>
+              </td> */}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+//Vitals Table
+export const VitalsTable = ({ data, action }) => {
+  return (
+    <table className="table-auto w-full">
+      <thead className="bg-dry rounded-md overflow-hidden">
+        <tr>
+          <th className={thclass}>S/N</th>
+          <th className={thclass}>Temp</th>
+          <th className={thclass}>Weight</th>
+          <th className={thclass}>Height</th>
+          <th className={thclass}>Resp. Rate</th>
+          <th className={thclass}>Heart Rate</th>
+          <th className={thclass}>Blood Sugar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr className="border-b border-border hover:bg-greyed transitions" onClick={action} key={index}>
+            <td className={tdclass}>
+              <p className="text-xs">{index + 1}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.temperature}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.weight}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.height}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs font-semibold">{item.respiratory_rate}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs font-semibold">{item.heart_rate}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs font-semibold">{item.blood_sugar_f}</p>
+            </td>
+
+            {/* <td className={tdclass}>
+                <button onClick={() => functions.preview(item.id)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
+                  <FiEye />
+                </button>
+              </td> */}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+//Vitals Table
+export const HistoryTable = ({ data, action }) => {
+  return (
+    <table className="table-auto w-full">
+      <thead className="bg-dry rounded-md overflow-hidden">
+        <tr>
+          <th className={thclass}>S/N</th>
+          <th className={thclass}>Complaint</th>
+          <th className={thclass}>Phy. Exam.</th>
+          <th className={thclass}>Gen. Exam</th>
+          <th className={thclass}>Resp.</th>
+          <th className={thclass}>Med. Hist.</th>
+          <th className={thclass}>Fam. Hist.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr className="border-b border-border hover:bg-greyed transitions" onClick={action} key={index}>
+            <td className={tdclass}>
+              <p className="text-xs">{index + 1}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.presenting_complaint_history}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.physical_examination}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs">{item.general_examination}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs font-semibold">{item.respiration}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs font-semibold">{item.medical_history}</p>
+            </td>
+            <td className={tdclass}>
+              <p className="text-xs font-semibold">{item.family_history}</p>
+            </td>
+
+            {/* <td className={tdclass}>
+                <button onClick={() => functions.preview(item.id)} className="text-sm flex-colo bg-white text-subMain border rounded-md w-10 h-10">
+                  <FiEye />
+                </button>
+              </td> */}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
 // invoice table
 export function InvoiceTable({ data }) {
   const navigate = useNavigate();
