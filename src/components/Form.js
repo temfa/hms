@@ -81,7 +81,7 @@ export function Select({ children, selectedPerson, setSelectedPerson, datas }) {
   );
 }
 
-export const Select2 = ({ children, selectedPerson, setSelectedPerson, datas }) => {
+export const Select2 = ({ children, selectedPerson, setSelectedPerson, datas, test }) => {
   return (
     <div className="text-sm relative w-full ">
       <div className="w-full">
@@ -90,7 +90,7 @@ export const Select2 = ({ children, selectedPerson, setSelectedPerson, datas }) 
           <Listbox.Options className="flex  flex-col gap-4 top-10 z-50 absolute left-0 w-full bg-white rounded-md shadow-lg py-4 px-6 ring-1 ring-border focus:outline-none">
             {datas?.map((person, index) => (
               <Listbox.Option className={`cursor-pointer text-xs hover:text-subMain`} key={index} value={person} disabled={person.unavailable}>
-                {person.fullname}
+                {test ? person.bed_no : person.fullname}
               </Listbox.Option>
             ))}
           </Listbox.Options>

@@ -73,7 +73,7 @@ const PreviewPatient = ({ data }) => {
 
   useEffect(() => {
     setValue("fullName", data.fullname);
-    setValue("email", data.email);
+    // setValue("email", data.email);
     setValue("phoneNumber", data.phone);
     setValue("address", data.address);
     setValue("emergencyContact", data.nok_name);
@@ -115,7 +115,7 @@ const PreviewPatient = ({ data }) => {
         {/* phone */}
         <Input label="Phone Number" color={true} type="number" register={{ ...register("phoneNumber") }} />
         {/* email */}
-        <Input label="Email" color={true} type="email" register={{ ...register("email") }} />
+        {/* <Input label="Email" color={true} type="email" register={{ ...register("email") }} /> */}
         <DatePickerComp label="Date of Birth" startDate={date} onChange={(date) => setDate(date)} />
 
         <>

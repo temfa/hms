@@ -35,7 +35,7 @@ const Nurses = () => {
     <Layout>
       {
         // add doctor modal
-        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Nurses"} datas={null} />
+        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Nurse"} datas={null} />
       }
       {/* add button */}
       <button
@@ -69,7 +69,7 @@ const Nurses = () => {
         </div>
         <div className="mt-8 w-full overflow-x-scroll">
           <DoctorsTable
-            doctor="Nurses"
+            doctor="Nurse"
             data={allUsers}
             functions={{
               preview: preview,

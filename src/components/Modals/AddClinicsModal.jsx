@@ -30,7 +30,8 @@ const AddClinicsModal = ({ closeModal, isOpen, title }) => {
       "create-Ward": true,
       name: data.name,
       short_code: data.shortName,
-      created_by: roles.user_id,
+      user_id: roles.user_id,
+      bed_nos: data.beds,
     };
 
     title === "Ward" ? createWard(datas) : createClinic(datad);
@@ -87,6 +88,7 @@ const AddClinicsModal = ({ closeModal, isOpen, title }) => {
           {errors.fullName && <span>{errors.name.message}</span>}
 
           <Input label="Short name" color={true} register={{ ...register("shortName") }} placeholder="Short name" />
+          <Input label="Number of beds" color={true} register={{ ...register("beds") }} placeholder="Number of Beds" />
           {/* buttones */}
           <div className="grid sm:grid-cols-2 gap-4 w-full">
             <button onClick={closeModal} className="bg-red-600 bg-opacity-5 text-red-600 text-sm p-4 rounded-lg font-light">

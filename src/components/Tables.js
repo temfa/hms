@@ -349,7 +349,7 @@ export function InvoiceTable({ data }) {
 }
 
 // clinic table
-export function ClinicTable({ data }) {
+export function ClinicTable({ data, title }) {
   const navigate = useNavigate();
   const DropDown1 = [
     {
@@ -384,18 +384,21 @@ export function ClinicTable({ data }) {
           <th className={thclass}>No. Doctors</th>
           <th className={thclass}>No. Nurses</th>
           <th className={thclass}>No. Patients</th>
+          {title === "Clinic" ? null : <th className={thclass}>No. Beds</th>}
           <th className={thclass}>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => (
-          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
-            <td className={tdclass}>#{item?.id}</td>
+        {data.map((item, index) => (
+          <tr key={index} className="border-b border-border hover:bg-greyed transitions">
+            <td className={tdclass}>#{index + 1}</td>
             <td className={tdclass}>{item.name}</td>
             <td className={tdclass}>{item?.short_code}</td>
             <td className={tdclass}>10</td>
-            <td className={`${tdclass} font-semibold`}>10</td>
-            <td className={`${tdclass} font-semibold`}>10</td>
+            <td className={tdclass}>10</td>
+            <td className={tdclass}>10</td>
+            {title === "Clinic" ? null : <td className={tdclass}>{item?.ward_beds.length}</td>}
+
             <td className={tdclass}>
               <MenuSelect datas={DropDown1} item={item}>
                 <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
@@ -471,7 +474,7 @@ export function MedicineTable({ data, onEdit }) {
 }
 
 // service table
-export function ServiceTable({ data, onEdit }) {
+export function ServiceTable({ data, onEdit, onDelete, filter }) {
   const DropDown1 = [
     {
       title: "Edit",
@@ -483,8 +486,8 @@ export function ServiceTable({ data, onEdit }) {
     {
       title: "Delete",
       icon: RiDeleteBin6Line,
-      onClick: () => {
-        toast.error("This feature is not available yet");
+      onClick: (item) => {
+        onDelete(item);
       },
     },
   ];
@@ -502,25 +505,27 @@ export function ServiceTable({ data, onEdit }) {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (
-          <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
-            <td className={tdclass}>
-              <h4 className="text-sm font-medium">{item?.name}</h4>
-            </td>
-            <td className={tdclass}>{item?.date}</td>
-            <td className={`${tdclass} font-semibold`}>{item?.price}</td>
-            <td className={tdclass}>
-              <span className={`text-xs font-medium ${!item?.status ? "text-red-600" : "text-green-600"}`}>{!item?.status ? "Disabled" : "Enabled"}</span>
-            </td>
-            <td className={tdclass}>
-              <MenuSelect datas={DropDown1} item={item}>
-                <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
-                  <BiDotsHorizontalRounded />
-                </div>
-              </MenuSelect>
-            </td>
-          </tr>
-        ))}
+        {data
+          ?.filter((el) => el?.name.toLowerCase().includes(filter.toLowerCase()))
+          .map((item, index) => (
+            <tr key={item.id} className="border-b border-border hover:bg-greyed transitions">
+              <td className={tdclass}>
+                <h4 className="text-sm font-medium">{item?.name}</h4>
+              </td>
+              <td className={tdclass}>{item?.date_created}</td>
+              <td className={`${tdclass} font-semibold`}>{item?.price}</td>
+              <td className={tdclass}>
+                <span className={`text-xs font-medium ${!item?.status ? "text-red-600" : "text-green-600"}`}>{!item?.status ? "Disabled" : "Enabled"}</span>
+              </td>
+              <td className={tdclass}>
+                <MenuSelect datas={DropDown1} item={item}>
+                  <div className="bg-dry border text-main text-xl py-2 px-4 rounded-lg">
+                    <BiDotsHorizontalRounded />
+                  </div>
+                </MenuSelect>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );

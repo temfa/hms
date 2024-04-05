@@ -79,7 +79,35 @@ export const mutationApi = createApi({
         };
       },
     }),
+    admission: builder.mutation({
+      query: (body) => {
+        return {
+          url: "/admission.php",
+          method: "POST",
+          body,
+        };
+      },
+    }),
+    services: builder.mutation({
+      query: (body) => {
+        return {
+          url: "/hospital-services.php",
+          method: "POST",
+          body,
+        };
+      },
+    }),
   }),
 });
 
-export const { usePatientMutation, useGetAllPatientMutation, useUsersMutation, useMedicalRecordMutation, useClinicsMutation, useWardsMutation, useMedicineMutation } = mutationApi;
+export const {
+  usePatientMutation,
+  useGetAllPatientMutation,
+  useUsersMutation,
+  useMedicalRecordMutation,
+  useClinicsMutation,
+  useWardsMutation,
+  useMedicineMutation,
+  useAdmissionMutation,
+  useServicesMutation,
+} = mutationApi;

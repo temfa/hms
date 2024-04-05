@@ -3,83 +3,95 @@ import Layout from "../../Layout";
 import { patientTab } from "../../components/Datas";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
-import MedicalRecord from "./MedicalRecord";
 import AppointmentsUsed from "../../components/UsedComp/AppointmentsUsed";
 import InvoiceUsed from "../../components/UsedComp/InvoiceUsed";
 import PaymentsUsed from "../../components/UsedComp/PaymentUsed";
 import PatientImages from "./PatientImages";
 import HealthInfomation from "./HealthInfomation";
-import { useMedicalRecordMutation, usePatientMutation } from "../../redux/api/mutationApi";
+import { useAdmissionMutation, usePatientMutation } from "../../redux/api/mutationApi";
 import toast from "react-hot-toast";
 import LoadingSkel from "../../components/LoadingSkel";
 import PreviewPatient from "../../components/Preview/previewPatient";
+import AdmitPatient from "./AdmitPatient";
+import Sure from "../../components/Modals/Sure";
+import { useSelector } from "react-redux";
+import { RiHeartLine } from "react-icons/ri";
 // import DentalChart from './DentalChart';
 
 const PatientProfile = () => {
+  const roles = useSelector((state) => state.roles);
   const location = useLocation();
   const locate = location.pathname.split("/");
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
   const [data, setData] = useState({});
-  const [medicalRecodData, setMedicalRecordData] = useState([]);
+  // const [medicalRecodData, setMedicalRecordData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const tabPanel = () => {
     switch (activeTab) {
       case 1:
-        return <MedicalRecord id={locate[locate.length - 1]} medicalRecodData={medicalRecodData} />;
+        return <PreviewPatient data={data} />;
       case 2:
-        return <AppointmentsUsed doctor={false} />;
+        return <HealthInfomation data={data} id={locate[locate.length - 1]} />;
       case 3:
-        return <InvoiceUsed />;
+        return <AppointmentsUsed doctor={false} />;
       case 4:
-        return <PaymentsUsed doctor={false} />;
+        return <InvoiceUsed />;
       case 5:
+        return <PaymentsUsed doctor={false} />;
+      case 6:
         return <PatientImages />;
       // case 6:
       //   return <DentalChart />;
       case 7:
         return <PreviewPatient data={data} />;
-      case 8:
-        return <HealthInfomation data={data} id={locate[locate.length - 1]} />;
+      // case 8:
+      //   return <HealthInfomation data={data} id={locate[locate.length - 1]} />;
+      case 9:
+        return <AdmitPatient id={locate[locate.length - 1]} />;
       default:
         return;
     }
   };
+
+  const onCloseModal = () => {
+    setIsOpen(false);
+  };
+
   const [patient, { data: patientNew, isLoading: patientNewLoad, isSuccess: patientNewSuccess, isError: patientNewFalse, error: patientNewErr }] = usePatientMutation();
-  const [getMedicalRecords, { data: getMedicalRecord, isSuccess: getMedicalRecordSuccess, isError: getMedicalRecordFalse, error: getMedicalRecordErr }] =
-    useMedicalRecordMutation();
-  useEffect(() => {
+
+  const [admission, { data: newAdmitted, isLoading: newAdmittedLoad, isSuccess: newAdmittedSuccess, isError: newAdmittedFalse, error: newAdmittedErr }] = useAdmissionMutation();
+
+  const discharge = (e) => {
+    e.preventDefault();
+    const locate = location.pathname.split("/");
     const data = {
-      "all-records": true,
+      "discharge-patient": true,
+      user_id: roles?.user_id,
+      patient_id: locate[locate.length - 1],
     };
-    getMedicalRecords(data);
-  }, [getMedicalRecords]);
+    admission(data);
+  };
 
   useEffect(() => {
-    if (getMedicalRecordSuccess) {
-      if (getMedicalRecord) {
-        console.log(getMedicalRecord);
-        const locate = location.pathname.split("/");
-        getMedicalRecord?.data?.filter((id) => {
-          if (id.patient_id === locate[locate.length - 1]) {
-            setMedicalRecordData((arr) => [...arr, id]);
-          }
-          return true;
-        });
-        // toast.success(getMedicalRecord.success);
-        //  navigate("/doctors");
+    if (newAdmittedSuccess) {
+      if (newAdmitted) {
+        toast.success("Patient Discharged Successfully");
+        onCloseModal();
+        setTimeout(() => {
+          navigate("/patients");
+        }, 4000);
       }
     }
-  }, [getMedicalRecord, getMedicalRecordSuccess, location.pathname]);
-  console.log(medicalRecodData);
+  }, [newAdmitted, newAdmittedSuccess, navigate]);
   useEffect(() => {
-    if (getMedicalRecordFalse) {
-      if (getMedicalRecordErr) {
-        console.log(getMedicalRecordErr);
-        toast.error(getMedicalRecordErr?.data?.error);
+    if (newAdmittedFalse) {
+      if (newAdmittedErr) {
+        console.log(newAdmittedErr);
       }
     }
-  }, [getMedicalRecordErr, getMedicalRecordFalse]);
+  }, [newAdmittedErr, newAdmittedFalse]);
 
   useEffect(() => {
     const locate = location.pathname.split("/");
@@ -101,7 +113,7 @@ const PatientProfile = () => {
     if (patientNewFalse) {
       if (patientNewErr) {
         console.log(patientNewErr);
-        toast.error(patientNewErr.data.error);
+        toast.error(patientNewErr?.data?.error);
         if (patientNewErr.data.error === "User not found") {
           navigate("/patients");
         }
@@ -150,15 +162,20 @@ const PatientProfile = () => {
                   <button
                     className={`
                 ${activeTab === 9 ? "bg-text text-subMain" : "bg-dry text-main hover:bg-text hover:text-subMain"}
-                text-xs gap-4 flex items-center w-full p-4 rounded text-center`}>
+                text-xs gap-4 flex items-center w-full p-4 rounded text-center`}
+                    onClick={() => setActiveTab(9)}>
+                    <RiHeartLine />
                     Admit Patient
                   </button>
                 ) : (
-                  <button className="bg-dry text-main hover:bg-text hover:text-subMain text-xs gap-4 flex items-center w-full p-4 rounded">Discharge Patient</button>
+                  <button className="bg-dry text-main hover:bg-text hover:text-subMain text-xs gap-4 flex items-center w-full p-4 rounded" onClick={() => setIsOpen(true)}>
+                    <RiHeartLine /> Discharge Patient
+                  </button>
                 )}
               </div>
             </div>
             {/* tab panel */}
+            {isOpen ? <Sure isOpen={isOpen} closeModal={onCloseModal} loading={newAdmittedLoad} action={discharge} /> : null}
             <div
               data-aos="fade-left"
               data-aos-duration="1000"

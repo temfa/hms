@@ -48,7 +48,7 @@ const Clinics = () => {
           <LoadingSkel />
         ) : (
           <div className="mt-8 w-full overflow-x-scroll">
-            <ClinicTable data={allClinics} />
+            <ClinicTable data={allClinics} title="Clinic" />
           </div>
         )}
       </div>

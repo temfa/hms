@@ -85,7 +85,7 @@ const MenuDatas = () => {
         icon: AiOutlineSetting,
       },
     ];
-  } else if (roles.role === "Nurses") {
+  } else if (roles.role === "Nurse") {
     return [
       {
         title: "Dashboard",
@@ -2265,26 +2265,31 @@ export const medicineData = [
 export const patientTab = [
   {
     id: 1,
+    title: "Patient Information",
+    icon: RiUserLine,
+  },
+  {
+    id: 2,
     title: "Medical Records",
     icon: TbChartHistogram,
   },
   {
-    id: 2,
+    id: 3,
     title: "Appointments",
     icon: BiCalendar,
   },
   {
-    id: 3,
+    id: 4,
     title: "Invoices",
     icon: RiFileList3Line,
   },
   {
-    id: 4,
+    id: 5,
     title: "Payments",
     icon: RiMoneyDollarCircleLine,
   },
   {
-    id: 5,
+    id: 6,
     title: "Images",
     icon: RiImageLine,
   },
@@ -2293,16 +2298,16 @@ export const patientTab = [
   //   title: "Dental Chart",
   //   icon: RiStethoscopeLine,
   // },
-  {
-    id: 7,
-    title: "Patient Information",
-    icon: RiUserLine,
-  },
-  {
-    id: 8,
-    title: "Health Information",
-    icon: RiHeartLine,
-  },
+  // {
+  //   id: 7,
+  //   title: "Patient Information",
+  //   icon: RiUserLine,
+  // },
+  // {
+  //   id: 8,
+  //   title: "Health Information",
+  //   icon: RiHeartLine,
+  // },
 ];
 
 export const healthInfo = [

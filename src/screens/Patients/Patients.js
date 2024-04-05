@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Layout";
 import { sortsDatas } from "../../components/Datas";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,8 +14,8 @@ const Patients = () => {
   const { allPatients } = useGetAllPatients();
   const [status, setStatus] = useState(sortsDatas.filterPatient[0]);
   const [patient, setPatient] = useState("");
-  const todayData = [];
-  const monthlyData = [];
+  const [todayData, setTodayData] = useState([]);
+  const [monthlyData, setMonthlyData] = useState([]);
   // const [gender, setGender] = useState(sortsDatas.genderFilter[0]);
   // const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   // const [startDate, endDate] = dateRange;
@@ -59,6 +59,18 @@ const Patients = () => {
       icon: MdOutlineCalendarMonth,
     },
   ];
+
+  useEffect(() => {
+    allPatients.map((item) => {
+      if (new Date(item.registration_date).getDate() === new Date().getDate()) {
+        setTodayData((e) => [...e, item]);
+      }
+      if (new Date(item.registration_date).getMonth() === new Date().getMonth()) {
+        setMonthlyData((e) => [...e, item]);
+      }
+      return true;
+    });
+  }, [allPatients]);
 
   // preview
   const previewPayment = (id) => {

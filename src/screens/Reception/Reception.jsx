@@ -35,7 +35,7 @@ const Reception = () => {
     <Layout>
       {
         // add doctor modal
-        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Record Officers"} datas={null} />
+        isOpen && <AddDoctorModal closeModal={onCloseModal} isOpen={isOpen} doctor={"Record Officer"} datas={null} />
       }
       {/* add button */}
       <button
