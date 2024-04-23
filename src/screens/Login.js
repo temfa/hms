@@ -48,7 +48,7 @@ const Login = () => {
   };
   return (
     <div className="w-full h-screen flex-colo bg-dry">
-      <form className="xs:w-4/5 w-2/5 p-8 rounded-2xl mx-auto bg-white flex-colo" onSubmit={handleSubmit(onSubmit)}>
+      <form className="xs:w-full lg:w-2/5 p-8 rounded-2xl mx-auto bg-white flex-colo" onSubmit={handleSubmit(onSubmit)}>
         <img src="/images/logo.png" alt="logo" className="w-48 h-16 object-contain" />
         <div className="flex flex-col gap-4 w-full mb-6">
           <Input label="Email" type="email" color={true} placeholder={"admin@gmail.com"} register={{ ...register("email", { required: "Email is required" }) }} />
